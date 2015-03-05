@@ -1,0 +1,22 @@
+###########################################################################
+# Python
+###########################################################################
+
+# Set virtualenv to use Distribute instead of the legacy setuptools
+export VIRTUALENV_DISTRIBUTE=true
+
+# Set the centralized location for new virtual environments
+export PIP_VIRTUALENV_BASE=$HOME/.virtualenvs
+
+# Set pip to only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+
+# Set pip to cache pip-installed packages to avoid re-downloading
+# export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+
+# Create a little function to allow for installing packages globally
+# usage: syspip install --upgrade somepackage
+# good example: syspip install --upgrade pip distribute virtualenv
+globalpip(){
+   PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
