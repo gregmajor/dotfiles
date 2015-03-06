@@ -76,15 +76,20 @@ On_IPurple="\[\033[10;95m\]"  # Purple
 On_ICyan="\[\033[0;106m\]"    # Cyan
 On_IWhite="\[\033[0;107m\]"   # White
 
-# This little bit is required since git bash completion is wonky with
-# some versions of OSX. See:
-# http://stackoverflow.com/questions/12870928/mac-bash-git-ps1-command-not-found
+# Look for and run the git-completion script
 
 if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash ]; then
-    . /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
+   . /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
+elif [ -f /etc/git-completion.bash ]; then
+   . /etc/git-completion.bash
 fi
 
-source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+# Look for and source the git-prompt stuff
+if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh ]; then
+   source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+elif [ -f /etc/git-prompt.sh ]; then
+   source /etc/git-prompt.sh
+fi
 
 # Various variables you might want for your PS1 prompt instead
 Time12h="\T"
@@ -96,7 +101,7 @@ Jobs="\j"
 Hostname="\h"
 Username="\u"
 
-export PS1=$Green$Username@$Hostname" "$Yellow$PathShort$Color_Off'$(git branch &>/dev/null;\
+export PS1="\n"$Green$Username@$Hostname" "$Yellow$PathShort$Color_Off'$(git branch &>/dev/null;\
 if [ $? -eq 0 ]; then \
   echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
   if [ "$?" -eq "0" ]; then \
@@ -104,7 +109,7 @@ if [ $? -eq 0 ]; then \
     echo "'$Green'"$(__git_ps1 " (%s)"); \
   else \
     # @5 - Changes to working tree
-    echo "'$IRed'"$(__git_ps1 " {%s}"); \
+    echo "'$Red'"$(__git_ps1 " {%s}"); \
   fi) '$Color_Off'\n\$ "; \
 else \
   # @2 - Prompt when not in GIT repo
