@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# This script will:
+# 1. Back up all the dot files
+# 2. Create symbolic links in home from ~/dotfiles
+
+dotFileDirectory=~/dotfiles
+backupDirectory=~/dotfiles/original
+
+dotFiles=".bashrc .bashprompt .vimrc .aliases .exports .functions .gitconfig .python .profile .gitignore_global"
+
+# Backup the existing dot files
+echo "Creating $backupDirectory..."
+mkdir -p $backupDirectory
+echo "...done!"
+
+# Change to the dot files directory
+echo "Changing to the $dotFileDirectory..."
+cd $dotFileDirectory
+echo "...done!"
+
+# Move any existing dot files then create symbolic links
+for dotFile in $dotFiles; do
+    if [ -h "$dotFile" ]
+    then
+        echo "$dotFile is a symbolic link... skipping!"
+    else
+        if [ -e ~/"$dotFile" ]
+        then
+            echo "Backing up $dotFile..."
+            mv ~/$dotFile $backupDirectory/
+        fi
+        echo "Linking $dotFile..."
+        ln -s $dotFileDirectory/$dotFile ~/$dotFile
+    fi
+done
+

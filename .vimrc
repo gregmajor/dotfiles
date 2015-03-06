@@ -21,13 +21,6 @@ set gdefault
 " Change mapleader
 "let mapleader=","
 
-" Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
-if exists("&undodir")
-	set undodir=~/.vim/undo
-endif
-
 " Dont create backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
 
