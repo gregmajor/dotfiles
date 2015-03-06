@@ -1,3 +1,13 @@
+# Visual Studio Customizations
+
+There is currently just one component which is appearance.
+
+## Appearance
+
+Appearance breaks down into two parts: the editor and the program.
+
+### The Editor
+
 To download:
 
 Either clone the repository and use the vssettings files on your computer, or:
@@ -16,3 +26,7 @@ To install:
 6. Select the vssettings file you downloaded.
 7. Click "Next".
 8. Done.
+
+### The Program
+
+The IDE itself is easy to customize. Just use the Visual Studio Theme Editor extension appropriate for the version of Visual Studio you're running. Grab the dark solarized theme from [Studio Styles](https://studiostyl.es/) and import it. You should be good to go!
