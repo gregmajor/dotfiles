@@ -5,7 +5,7 @@
 # 2. Create symbolic links in home from ~/dotfiles
 
 dotFileDirectory=~/dotfiles
-backupDirectory=~/dotfiles/original
+backupDirectory=~/.dotfilebackup
 
 dotFiles=".bashrc .bashprompt .vimrc .aliases .exports .functions .gitconfig .python .profile .gitignore_global"
 
