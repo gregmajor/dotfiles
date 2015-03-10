@@ -15,3 +15,8 @@ source ~/.exports
 
 # Python Stuff
 source ~/.python
+
+# SSH Agent Stuff
+if [ -f ~/.sshagent ]; then
+    source ~/.sshagent
+fi
