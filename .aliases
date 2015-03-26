@@ -13,6 +13,7 @@ alias dt="cd ~/Desktop"
 alias code="cd ~/Code"
 alias ab="cd ~/Code/Autobahn"
 alias dots="cd ~/dotfiles"
+alias blog="cd ~/Code/gregmajor.github.io"
 alias psake="powershell psake.ps1"
 
 # Detect which `ls` flavor is in use
