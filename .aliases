@@ -13,6 +13,7 @@ alias dt="cd ~/Desktop"
 alias code="cd ~/Code"
 alias ab="cd ~/Code/Autobahn"
 alias dots="cd ~/dotfiles"
+alias psake="powershell psake.ps1"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
