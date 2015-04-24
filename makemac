@@ -3,22 +3,39 @@
 # Configuration Items
 ###################################################################################################
 
+# Set continue to false by default.
+CONTINUE=false
+
+# Set the location where homebrew casks symlink.
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Functions
 ###################################################################################################
 
+# The echo colors.
+black='\033[0;30m'
+white='\033[0;37m'
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+blue='\033[0;34m'
+magenta='\033[0;35m'
+cyan='\033[0;36m'
+
+# Resets the style.
+reset=`tput sgr0`
+
+# Prints a color echo message.
+# arg $1 = message
+# arg $2 = Color
+cecho() {
+    echo "${2}${1}${reset}"
+    return
+}
+
 # Displays the program usage information.
 function usage() {
     echo "usage: makemac [[[-e extras] [-n noextras]] | [-h help]]"
-}
-
-# A fancier way to echo to the terminal.
-fancy_echo() {
-  local fmt="$1"; shift
-
-  # shellcheck disable=SC2059
-  printf "\n$fmt\n" "$@"
 }
 
 # Checks to make sure we're running on a Mac.
@@ -28,15 +45,15 @@ check_operating_system() {
             #echo "Detected OSX!"
             ;;
         linux*)
-            echo "Sorry, but this script is intended for Macs running OSX and you're running Linux!"
+            cecho "Sorry, but this script is intended for Macs running OSX and you're running Linux!" $red
             exit
             ;;
         bsd*)
-            echo "Sorry, but this script is intended for Macs running OSX and you're running BSD!"
+            cecho "Sorry, but this script is intended for Macs running OSX and you're running BSD!" $red
             exit
             ;;
         *)
-            echo "Sorry, but this script is intended for Macs running OSX!"
+            cecho "Sorry, but this script is intended for Macs running OSX!" $red
             exit
             ;;
     esac
@@ -44,294 +61,468 @@ check_operating_system() {
 
 # Appends text to a file.
 append_to_file() {
-  local file="$1"
-  local text="$2"
+    local file="$1"
+    local text="$2"
 
-  if [ "$file" = "$HOME/.zshrc" ]; then
-    if [ -w "$HOME/.zshrc.local" ]; then
-      file="$HOME/.zshrc.local"
-    else
-      file="$HOME/.zshrc"
+    if [ "$file" = "$HOME/.zshrc" ]; then
+        if [ -w "$HOME/.zshrc.local" ]; then
+            file="$HOME/.zshrc.local"
+        else
+            file="$HOME/.zshrc"
+        fi
     fi
-  fi
 
-  if ! grep -Fqs "$text" "$file"; then
-    printf "\n%s\n" "$text" >> "$file"
-  fi
+    if ! grep -Fqs "$text" "$file"; then
+        printf "\n%s\n" "$text" >> "$file"
+    fi
+}
+
+# Sets the computer name, host name, and local host name.
+set_computer_name() {
+    echo ""
+    cecho "Would you like to set your computer name? (y/n)" $magenta
+    read -r response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        cecho "What would you like it to be?" $magenta
+        read COMPUTER_NAME
+        sudo scutil --set ComputerName $COMPUTER_NAME
+        sudo scutil --set HostName $COMPUTER_NAME
+        sudo scutil --set LocalHostName $COMPUTER_NAME
+        sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
+    fi
 }
 
 # Sets the OSX preferences I like.
 set_osx_preferences() {
+    echo ""
+    cecho "Set OSX preferences? (y/n)" $magenta
+    read -r response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        cecho "[+] Setting a blazingly fast keyboard repeat rate" $green
+        defaults write NSGlobalDomain KeyRepeat -int 0.02
 
-    fancy_echo 'Setting OSX preferences...'
+        cecho "[+] Setting a shorter delay until key repeat" $green
+        defaults write NSGlobalDomain InitialKeyRepeat -int 12
 
-    # Set a blazingly fast keyboard repeat rate.
-    defaults write NSGlobalDomain KeyRepeat -int 0.02
+        cecho "[+] Enabling the Safari debug menu" $green
+        defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
-    # Set a shorter Delay until key repeat.
-    defaults write NSGlobalDomain InitialKeyRepeat -int 12
+        cecho "[+] Enabling the Develop menu and the Web Inspector in Safari" $green
+        defaults write com.apple.Safari IncludeDevelopMenu -bool true
+        defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+        defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
 
-    # Enable Safari debug menu.
-    defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+        cecho "[+] Showing the path bar in Finder" $green
+        defaults write com.apple.finder ShowPathbar -bool true
 
-    # Show the path bar in Finder.
-    defaults write com.apple.finder ShowPathbar -bool true
+        cecho "[+] Showing the status bar in Finder" $green
+        defaults write com.apple.finder ShowStatusBar -bool true
 
-    # Show Status bar in Finder.
-    defaults write com.apple.finder ShowStatusBar -bool true
+        cecho "[+] Showing indicator lights for open applications in the Dock" $green
+        defaults write com.apple.dock show-process-indicators -bool true
 
-    # Show indicator lights for open applications in the Dock.
-    defaults write com.apple.dock show-process-indicators -bool true
+        cecho "[+] Setting the mouse scroll direction" $green
+        defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
-    # Setting the mouse scroll direction.
-    defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+        cecho "[+] Showing all processes in Activity Monitor by default" $green
+        defaults write com.apple.ActivityMonitor ShowCategory -int 100
 
-    # Show all processes in Activity Monitor by default.
-    defaults write com.apple.ActivityMonitor ShowCategory -int 100
+        cecho "[+] Expanding the save panel by default" $green
+        defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+        defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+        defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+        cecho "[+] Adding a context menu item for showing the Web Inspector in web views" $green
+        defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+        cecho "[+] Disabling the annoying backswipe in Chrome" $green
+        defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+        defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
+
+        cecho "[+] Using the system-native print preview dialog in Chrome" $green
+        defaults write com.google.Chrome DisablePrintPreview -bool true
+        defaults write com.google.Chrome.canary DisablePrintPreview -bool true
+
+        cecho "[+] Revealing IP address, hostname, OS version, etc. when clicking the clock in the login window" $green
+        sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
+        cecho "[+] Checking for software updates daily instead of just once per week" $green
+        defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+        cecho "[+] Automatically quit printer app once the print jobs complete" $green
+        defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+        # Trackpad: enable tap to click for this user and for the login screen
+        echo ""
+        cecho "Enable tap-to-click? (y/n)" $magenta
+        read -r response
+        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+            defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+            defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+        fi
+
+        echo ""
+        cecho "Save to disk instead of iCloud by default? (y/n)" $magenta
+        read -r response
+        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+          defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+        fi
+
+        echo ""
+        cecho "Disable the sudden motion sensor (it's not useful for SSDs)? (y/n)" $magenta
+        read -r response
+        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            sudo pmset -a sms 0
+        fi
+
+        echo ""
+        cecho "Show all filename extensions in Finder by default? (y/n)" $magenta
+        read -r response
+        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+        fi
+
+        echo ""
+        cecho "Display full POSIX path as Finder window title? (y/n)" $magenta
+        read -r response
+        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+        fi
+
+        echo ""
+        cecho "Disable the warning when changing a file extension? (y/n)" $magenta
+        read -r response
+        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+        fi
+
+        echo ""
+        cecho "Use column view in all Finder windows by default? (y/n)" $magenta
+        read -r response
+        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            defaults write com.apple.finder FXPreferredViewStyle Clmv
+        fi
+
+        echo ""
+        cecho "Avoid creation of .DS_Store files on network volumes? (y/n)" $magenta
+        read -r response
+        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+        fi
+    fi
 }
 
-# Creates the directories I always want.
+# Creates directories that are generally desired.
 create_directories() {
+    echo ""
+    cecho "Create standard directories? (y/n)" $magenta
+    read -r response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
 
-    # Make the Bin directory...
-    if [ ! -d "$HOME/Bin/" ]; then
-        fancy_echo "Creating Bin directory..."
-        mkdir "$HOME/Bin"
-    fi
+        # Make the Bin directory...
+        if [ ! -d "$HOME/Bin/" ]; then
+            cecho "Creating Bin directory..." $green
+            mkdir "$HOME/Bin"
+        fi
 
-    # Make the Code directory...
-    if [ ! -d "$HOME/Code/" ]; then
-        fancy_echo "Creating Code directory..."
-        mkdir "$HOME/Code"
+        # Make the Code directory...
+        if [ ! -d "$HOME/Code/" ]; then
+            cecho "Creating Code directory..." $green
+            mkdir "$HOME/Code"
+        fi
     fi
 }
 
 # Install homebrew.
 install_homebrew() {
     if ! command -v brew >/dev/null; then
-      fancy_echo "Installing homebrew..."
+      cecho "Installing homebrew..." $green
         curl -fsS \
           'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
 
         # shellcheck disable=SC2016
         #append_to_file "$HOME/.zshrc" 'export PATH="/usr/local/bin:$PATH"'
     else
-      fancy_echo "Homebrew already installed. Skipping!"
+      cecho "Homebrew already installed. Skipping!" $yellow
     fi
 }
 
 # Install or upgrade a formula with homebrew.
 install_or_upgrade_with_homebrew() {
-  if is_installed_by_homebrew "$1"; then
-    if is_upgradable_by_homebrew "$1"; then
-      fancy_echo "Upgrading %s..." "$1"
-      brew upgrade "$@"
+    if is_installed_by_homebrew "$1"; then
+        if is_upgradable_by_homebrew "$1"; then
+            cecho "Upgrading $1..." $green
+            brew upgrade "$@"
+        else
+            cecho "Already using the latest version of $1. Skipping..." $yellow
+        fi
     else
-      fancy_echo "Already using the latest version of %s. Skipping..." "$1"
+        cecho "Installing $1..." $green
+        brew install "$@"
     fi
-  else
-    fancy_echo "Installing %s..." "$1"
-    brew install "$@"
-  fi
 }
 
 # Determine if a formula is installed by homebrew.
 is_installed_by_homebrew() {
-  brew list -1 | grep -Fqx "$1"
+    brew list -1 | grep -Fqx "$1"
 }
 
 # Determine if a formula is upgradable by homebrew.
 is_upgradable_by_homebrew() {
-  ! brew outdated --quiet "$1" >/dev/null
+    ! brew outdated --quiet "$1" >/dev/null
 }
 
 # Determine if something is installed by brew tap.
 is_installed_by_brew_tap() {
-  brew tap | grep -Fqx "$1"
+    brew tap | grep -Fqx "$1"
 }
 
-# Install something with brew tap.
+# Adds a new brew tap.
 add_homebrew_tap() {
-  if ! is_installed_by_brew_tap "$1"; then
-    fancy_echo "Tapping $1..."
-    brew tap "$1" 2> /dev/null
-  fi
+    if ! is_installed_by_brew_tap "$1"; then
+        cecho "Tapping $1..." $green
+        brew tap "$1" 2> /dev/null
+    fi
 }
 
 # Installs or updates a gem.
 gem_install_or_update() {
-  if gem list "$1" | grep "^$1 ("; then
-    fancy_echo "Updating %s ..." "$1"
-    gem update "$@"
-  else
-    fancy_echo "Installing %s ..." "$1"
-    gem install "$@"
-  fi
+    if gem list "$1" | grep "^$1 ("; then
+        cecho "Updating $1..." $green
+        gem update "$@"
+    else
+        cecho "Installing $1..." $green
+        gem install "$@"
+    fi
 }
 
 # Expands cask info for helping to see if something is installed by brew cask.
 brew_cask_expand_alias() {
-  brew cask info "$1" 2>/dev/null | head -1 | awk '{gsub(/:/, ""); print $1}'
+    brew cask info "$1" 2>/dev/null | head -1 | awk '{gsub(/:/, ""); print $1}'
 }
 
 # Determine if something is installed by brew cask.
 is_installed_with_brew_cask() {
-  local NAME
-  NAME=$(brew_cask_expand_alias "$1")
-  brew cask list -1 | grep -Fqx "$NAME"
+    local NAME
+    NAME=$(brew_cask_expand_alias "$1")
+    brew cask list -1 | grep -Fqx "$NAME"
+}
+
+# Updates homebrew's formulae.
+update_homebrew_formulae() {
+    cecho "Updating homebrew formulae..." $green
+    sudo brew update && brew cleanup && brew cask cleanup
 }
 
 # Determine if an app is installed.
 app_is_installed() {
-  local app_name
-  app_name=$(echo "$1" | cut -d'-' -f1)
-  find /Applications -iname "$app_name*" -maxdepth 1 | egrep '.*' > /dev/null
+    local app_name
+    app_name=$(echo "$1" | cut -d'-' -f1)
+    find /Applications -iname "$app_name*" -maxdepth 1 | egrep '.*' > /dev/null
 }
 
 # Install something with brew cask.
 install_with_brew_cask() {
-  if app_is_installed "$1" || is_installed_with_brew_cask "$1"; then
-    fancy_echo "$1 is already installed. Skipping..."
-  else
-    fancy_echo "Installing $1..."
-    brew cask install "$@"
-  fi
+    if app_is_installed "$1" || is_installed_with_brew_cask "$1"; then
+        cecho "$1 is already installed. Skipping..." $yellow
+    else
+        cecho "Installing $1..." $green
+        brew cask install "$@"
+    fi
 }
 
 # Installs Ruby and RVM.
 install_ruby() {
-    append_to_file "$HOME/.gemrc" 'gem: --no-document'
+    echo ""
+    cecho "Install Ruby? (y/n)" $magenta
+    read -r response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        append_to_file "$HOME/.gemrc" 'gem: --no-document'
 
-    if ! command -v rbenv >/dev/null; then
-      if ! command -v rvm >/dev/null; then
-        fancy_echo 'Installing RVM and the latest Ruby...'
-        curl -L https://get.rvm.io | bash -s stable --ruby --auto-dotfiles --autolibs=enable
-        . ~/.rvm/scripts/rvm
-      else
-        local_version="$(rvm -v 2> /dev/null | awk '$2 != ""{print $2}')"
-        latest_version="$(curl -s https://raw.githubusercontent.com/wayneeseguin/rvm/stable/VERSION)"
-        if [ "$local_version" != "$latest_version" ]; then
-          fancy_echo 'Upgrading RVM...'
-          rvm get stable --auto-dotfiles --autolibs=enable
-        else
-          fancy_echo "Already using the latest version of RVM. Skipping..."
+        if ! command -v rbenv >/dev/null; then
+          if ! command -v rvm >/dev/null; then
+            cecho "Installing RVM and the latest Ruby..." $green
+            curl -L https://get.rvm.io | bash -s stable --ruby --auto-dotfiles --autolibs=enable
+            source ~/.rvm/scripts/rvm
+          else
+            local_version="$(rvm -v 2> /dev/null | awk '$2 != ""{print $2}')"
+            latest_version="$(curl -s https://raw.githubusercontent.com/wayneeseguin/rvm/stable/VERSION)"
+            if [ "$local_version" != "$latest_version" ]; then
+              cecho "Upgrading RVM..." $green
+              rvm get stable --auto-dotfiles --autolibs=enable
+            else
+              cecho "Already using the latest version of RVM. Skipping..." $yellow
+            fi
+          fi
         fi
-      fi
+
+        cecho "Updating Rubygems..." $green
+        gem update --system
+
+        gem_install_or_update 'bundler'
+
+        cecho "Configuring Bundler..." $green
+        number_of_cores=$(sysctl -n hw.ncpu)
+        bundle config --global jobs $((number_of_cores - 1))
+
+        append_to_file "$HOME/.rvmrc" 'rvm_auto_reload_flag=2'
     fi
-
-    fancy_echo 'Updating Rubygems...'
-    gem update --system
-
-    gem_install_or_update 'bundler'
-
-    fancy_echo "Configuring Bundler..."
-    number_of_cores=$(sysctl -n hw.ncpu)
-    bundle config --global jobs $((number_of_cores - 1))
-
-    append_to_file "$HOME/.rvmrc" 'rvm_auto_reload_flag=2'
 }
 
-# Installs the essentials.
-install_essentials() {
-    create_directories
+# Installs Node.js.
+install_node() {
+    echo ""
+    cecho "Install Node.js? (y/n)" $magenta
+    read -r response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        install_or_upgrade_with_homebrew 'node'
+        npm install --global bower
+        npm install --global grunt-cli
+    fi
+}
 
-    set_osx_preferences
+# Installs Python.
+install_python() {
+    echo ""
+    cecho "Install Python? (y/n)" $magenta
+    read -r response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        install_or_upgrade_with_homebrew 'python'
+        install_with_brew_cask 'pycharm'
+        #pip install virtualenv
+    fi
+}
 
-    install_homebrew
-
-    fancy_echo 'Updating homebrew formulae...'
-    brew update
-
+# Installs core software.
+install_core_software() {
     add_homebrew_tap 'gapple/services'      # Allows starting and stopping of services via homebrew
     add_homebrew_tap 'caskroom/cask'        # Allows installing apps via homebrew
     add_homebrew_tap 'caskroom/versions'    # Allows installing different versions of stuff via homebrew
 
-    # Essentials
     install_or_upgrade_with_homebrew 'brew-cask'
     install_or_upgrade_with_homebrew 'git'
-    install_or_upgrade_with_homebrew 'python'
-    install_or_upgrade_with_homebrew 'tree'
-    install_with_brew_cask 'alfred'
-    install_with_brew_cask 'caffeine'
-    install_with_brew_cask 'google-chrome'
-    install_with_brew_cask 'brackets'
     install_with_brew_cask 'iterm2'
-    install_with_brew_cask 'lastpass'
-    install_with_brew_cask 'angry-ip-scanner'
-    install_with_brew_cask 'transmit'
+
+    echo ""
+        cecho "Disable iTerm confirmation on quit? (y/n)" $magenta
+        read -r response
+        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+    fi
 }
 
-# Installs the extras.
-install_extras() {
-    # Development Stuff
-    install_or_upgrade_with_homebrew 'qt'
-    install_or_upgrade_with_homebrew 'heroku-toolbelt'
-    install_or_upgrade_with_homebrew 'sqlite'
-    install_or_upgrade_with_homebrew 'node'
-    install_with_brew_cask 'caskroom/homebrew-versions/java6'
-    install_with_brew_cask 'pycharm'
-    install_with_brew_cask 'dash'
-    install_with_brew_cask 'p4merge'
-    install_with_brew_cask 'navicat-premium-essentials'
-    install_with_brew_cask 'coderunner'
+# Installs the essentials.
+install_essential_software() {
+    echo ""
+    cecho "Install essential software? (y/n)" $magenta
+    read -r response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        install_or_upgrade_with_homebrew 'tree'
+        install_with_brew_cask 'alfred'
+        install_with_brew_cask 'caffeine'
+        install_with_brew_cask 'google-chrome'
+        install_with_brew_cask 'brackets'
+        install_with_brew_cask 'lastpass'
+        install_with_brew_cask 'angry-ip-scanner'
+        install_with_brew_cask 'transmit'
+    fi
+}
 
-    #install_ruby
+# Installs software for development.
+install_development_software() {
+    echo ""
+    cecho "Install development software? (y/n)" $magenta
+    read -r response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        install_or_upgrade_with_homebrew 'qt'
+        install_or_upgrade_with_homebrew 'heroku-toolbelt'
+        install_or_upgrade_with_homebrew 'sqlite'
+        install_with_brew_cask 'caskroom/homebrew-versions/java6'
+        install_with_brew_cask 'dash'
+        install_with_brew_cask 'p4merge'
+        install_with_brew_cask 'navicat-premium-essentials'
+        install_with_brew_cask 'coderunner'
 
-    #install_or_upgrade_with_homebrew 'postgresql'
-    #brew services restart postgresql
+        install_python
+        install_node
+        install_ruby
 
-    # Client Stuff
-    install_with_brew_cask 'flux'
-    install_with_brew_cask 'controlplane'
-    install_with_brew_cask 'xquartz'
-    install_with_brew_cask 'vlc'
-    install_with_brew_cask 'bartender'
-    install_with_brew_cask 'spideroak'
-    install_with_brew_cask 'evernote'
-    install_with_brew_cask 'dropzone'
-    install_with_brew_cask 'parallels-desktop'
+        #install_or_upgrade_with_homebrew 'postgresql'
+        #brew services restart postgresql
+    fi
+}
 
-    fancy_echo 'No package exists for:'
-    fancy_echo '   colorsnapper'
-    fancy_echo '   popclip'
+# Installs client software.
+install_client_software() {
+    echo ""
+    cecho "Install client software? (y/n)" $magenta
+    read -r response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        install_with_brew_cask 'flux'
+        install_with_brew_cask 'controlplane'
+        install_with_brew_cask 'xquartz'
+        install_with_brew_cask 'vlc'
+        install_with_brew_cask 'bartender'
+        install_with_brew_cask 'spideroak'
+        install_with_brew_cask 'evernote'
+        install_with_brew_cask 'dropzone'
+        install_with_brew_cask 'parallels-desktop'
+
+        echo "No package exists for:"
+        echo "   colorsnapper"
+        echo "   popclip"
+        echo "You may want to install those manually."
+    fi
 }
 
 # Main
 ###################################################################################################
 
-main() {
-    extras="$1"
+# shellcheck disable=SC2154
+trap 'ret=$?; test $ret -ne 0 && printf "\nFailed!\n" >&2; exit $ret' EXIT
+set -e
 
-    check_operating_system
+echo ""
+cecho "+------------------------------------------------------------+" $red
+cecho "|                           WARNING!                         |" $red
+cecho "+------------------------------------------------------------+" $red
+cecho "| This script is not intended to be run without reading and  |" $red
+cecho "|  completely understanding every part of it first. It will  |" $red
+cecho "| make changes to your preferences, install software, and it |" $red
+cecho "|          may reverse the Earth's magnetic poles.           |" $red
+cecho "+------------------------------------------------------------+" $red
+echo ""
 
-    # shellcheck disable=SC2154
-    trap 'ret=$?; test $ret -ne 0 && printf "\nFailed!\n" >&2; exit $ret' EXIT
-    set -e
+echo ""
+cecho "Proceed? (y/n)" $magenta
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    CONTINUE=true
+fi
 
-    install_essentials
+if ! $CONTINUE; then
+    exit
+fi
 
-    if [ "$extras" == "true" ]; then
-        fancy_echo 'Installing extras...'
-        install_extras
-    else
-        fancy_echo 'Skipping extras...'
-    fi
+# Ask for the administrator password and run a keep-alive to update existing `sudo` timestamp until script has finished.
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-    fancy_echo 'Finished initialization!'
-}
+# Make sure that the admin group owns usr/local and make it writable by that group.
+sudo chgrp -R admin /usr/local
+sudo chmod -R g+w /usr/local
 
-case $1 in
-    -e | --extras )     shift
-                        main "true"
-                        exit
-                        ;;
-    -n | --noextras )   shift
-                        main "false"
-                        exit
-                        ;;
-    -h | --help )       usage
-                        exit
-                        ;;
-    * )                 usage
-                        exit 1
-esac
+check_operating_system
+set_computer_name
+create_directories
+set_osx_preferences
+install_homebrew
+install_core_software
+update_homebrew_formulae
+install_essential_software
+install_development_software
+install_client_software
+
+echo ""
+cecho "Done! Please remember that it's a really good idea to reboot now." $green
