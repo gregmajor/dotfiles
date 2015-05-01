@@ -419,6 +419,7 @@ install_essential_software() {
     read -r response
     if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
         install_or_upgrade_with_homebrew 'tree'
+        install_or_upgrade_with_homebrew 'thefuck'
         install_with_brew_cask 'alfred'
         install_with_brew_cask 'caffeine'
         install_with_brew_cask 'google-chrome'
@@ -469,6 +470,9 @@ install_client_software() {
         install_with_brew_cask 'evernote'
         install_with_brew_cask 'dropzone'
         install_with_brew_cask 'parallels-desktop'
+        install_with_brew_cask 'visual-studio-code'
+        install_with_brew_cask 'totalfinder'
+        install_with_brew_cask 'totalterminal'
 
         echo "No package exists for:"
         echo "   colorsnapper"
