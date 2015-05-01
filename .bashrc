@@ -1,5 +1,6 @@
 # Path Stuff
 export PATH=/usr/local/bin:~/bin:$PATH
+# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # Git + Bash Prompt
 source ~/.bashprompt
@@ -20,3 +21,4 @@ source ~/.python
 if [ -f ~/.sshagent ]; then
     source ~/.sshagent
 fi
+

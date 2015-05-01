@@ -17,3 +17,6 @@ export LESS_TERMCAP_md="${yellow}";
 
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
+
+# Make Homebrew symlink to the root Applications directory.
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"

@@ -426,6 +426,7 @@ install_essential_software() {
         install_with_brew_cask 'lastpass'
         install_with_brew_cask 'angry-ip-scanner'
         install_with_brew_cask 'transmit'
+        install_with_brew_cask 'midnight-commander'
     fi
 }
 
@@ -472,6 +473,7 @@ install_client_software() {
         echo "No package exists for:"
         echo "   colorsnapper"
         echo "   popclip"
+        echo "   tg-pro"
         echo "You may want to install those manually."
     fi
 }

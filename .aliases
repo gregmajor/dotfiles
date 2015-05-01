@@ -16,6 +16,9 @@ alias dots="cd ~/dotfiles"
 alias blog="cd ~/Code/gregmajor.github.io"
 alias psake="powershell psake.ps1"
 
+# Da fuck?
+alias fuck='$(thefuck $(fc -ln -1))'
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
     colorflag="--color -Flash"

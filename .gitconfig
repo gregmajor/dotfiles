@@ -70,3 +70,5 @@
 
 	# List contributors with number of commits
 	contributors = shortlog --summary --numbered
+[push]
+	default = simple
