@@ -14,6 +14,7 @@ alias code="cd ~/Code"
 alias ab="cd ~/Code/Autobahn"
 alias dots="cd ~/dotfiles"
 alias blog="cd ~/Code/gregmajor.github.io"
+alias leadpipe="cd ~/Code/LeadPipe.Net"
 alias psake="powershell psake.ps1"
 
 # Da fuck?

@@ -440,6 +440,7 @@ install_development_software() {
         install_or_upgrade_with_homebrew 'qt'
         install_or_upgrade_with_homebrew 'heroku-toolbelt'
         install_or_upgrade_with_homebrew 'sqlite'
+        install_or_upgrade_with_homebrew 'mono'
         install_with_brew_cask 'caskroom/homebrew-versions/java6'
         install_with_brew_cask 'dash'
         install_with_brew_cask 'p4merge'
