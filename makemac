@@ -474,7 +474,7 @@ install_client_software() {
         install_with_brew_cask 'visual-studio-code'
         install_with_brew_cask 'totalfinder'
         install_with_brew_cask 'totalterminal'
-        install_or_upgrade_with_homebrew 'hocus-focus'
+        install_with_brew_cask 'hocus-focus'
 
         echo "No package exists for:"
         echo "   colorsnapper"
