@@ -476,6 +476,8 @@ install_client_software() {
         install_with_brew_cask 'totalterminal'
         install_with_brew_cask 'hocus-focus'
         install_with_brew_cask 'ubersicht'
+        install_with_brew_cask 'karabiner'
+        install_with_brew_cask 'hammerspoon'
 
         echo "No package exists for:"
         echo "   colorsnapper"
