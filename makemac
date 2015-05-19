@@ -394,6 +394,16 @@ install_python() {
     fi
 }
 
+# Installs Parallels.
+install_parallels() {
+    echo ""
+    cecho "Install Parallels? (y/n)" $magenta
+    read -r response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        install_with_brew_cask 'parallels-desktop'
+    fi
+}
+
 # Installs core software.
 install_core_software() {
     add_homebrew_tap 'gapple/services'      # Allows starting and stopping of services via homebrew
@@ -470,8 +480,7 @@ install_client_software() {
         install_with_brew_cask 'bartender'
         install_with_brew_cask 'spideroak'
         install_with_brew_cask 'evernote'
-        install_with_brew_cask 'dropzone'
-        install_with_brew_cask 'parallels-desktop'
+        #install_with_brew_cask 'dropzone'
         install_with_brew_cask 'totalfinder'
         install_with_brew_cask 'totalterminal'
         install_with_brew_cask 'hocus-focus'
@@ -534,6 +543,7 @@ update_homebrew_formulae
 install_essential_software
 install_development_software
 install_client_software
+install_parallels
 
 echo ""
 cecho "Done! Please remember that it's a really good idea to reboot now." $green
