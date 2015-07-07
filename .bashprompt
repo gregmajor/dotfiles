@@ -101,7 +101,13 @@ Jobs="\j"
 Hostname="\h"
 Username="\u"
 
-export PS1="\n"$Green$Username@$Hostname" "$Yellow$PathShort$Color_Off'$(git branch &>/dev/null;\
+# Remove this...
+#
+# :$( [ $? == 0 ] && echo ") " || echo "( " )
+#
+# ...if you don't love smiley faces
+
+export PS1="\n":$( [ $? == 0 ] && echo ") " || echo "( " )$Green$Username@$Hostname" "$Yellow$PathShort$Color_Off'$(git branch &>/dev/null;\
 if [ $? -eq 0 ]; then \
   echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
   if [ "$?" -eq "0" ]; then \
