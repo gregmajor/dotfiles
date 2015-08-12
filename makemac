@@ -438,6 +438,7 @@ install_essential_software() {
         install_with_brew_cask 'lastpass'
         install_with_brew_cask 'angry-ip-scanner'
         install_with_brew_cask 'transmit'
+        install_with_brew_cask 'transmission'
         install_with_brew_cask 'midnight-commander'
     fi
 }
