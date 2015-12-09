@@ -440,6 +440,7 @@ install_essential_software() {
         install_with_brew_cask 'transmit'
         install_with_brew_cask 'transmission'
         install_with_brew_cask 'midnight-commander'
+        install_with_brew_cask 'little-snitch'
     fi
 }
 
