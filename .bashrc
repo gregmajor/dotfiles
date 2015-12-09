@@ -1,5 +1,5 @@
 # Path Stuff
-export PATH=/usr/local/sbin:/usr/local/bin:~/bin:$PATH
+export PATH=/usr/local/sbin:/usr/local/bin:~/bin:$PATH:~/dotfiles/bin
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # Git + Bash Prompt
