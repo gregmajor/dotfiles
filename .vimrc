@@ -3,6 +3,28 @@
 "colorscheme solarized
 "let g:solarized_termtrans=1
 
+" Configure Vundle
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+" Use Airline
+Plugin 'bling/vim-airline'
+
+" Vundle needs this, too
+call vundle#end()
+filetype plugin indent on
+
+" Okay, all the Vundle and plugin stuff is over now
+
+" Enable the buffer list with airline
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename in the airline tab
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 " Enhance command-line completion
 set wildmenu
 
