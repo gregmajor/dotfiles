@@ -1,54 +1,95 @@
-# Path to the oh-my-zsh configuration folder.
-ZSH=$HOME/.oh-my-zsh
+# Path to your oh-my-zsh installation.
+export ZSH=/home/greg/.oh-my-zsh
 
-# Set the theme name (look in ~/.oh-my-zsh/themes/).
-ZSH_THEME="bira"
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+#ZSH_THEME="bira"
+ZSH_THEME="bullet-train"
 
-# Plugins separated by spaces (~/.oh-my-zsh/plugins/)
-plugins=(git)
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-# Aliases
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git virtualenv python pip debian)
+
+# User configuration
+
+export PATH="/usr/local/sbin:/usr/local/bin:~/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:~/dotfiles/bin"
+# export MANPATH="/usr/local/man:$MANPATH"
+
+source $ZSH/oh-my-zsh.sh
+
 source ~/.aliases
 
-# Functions
 source ~/.functions
 
-# Exports
 source ~/.exports
 
-# Python Stuff
-if [ -f ~/.python ]; then
-    source ~/.python
-fi
+source ~/.python
 
-# Redis Stuff
-if [ -f ~/.redis ]; then
-    source ~/.redis
-fi
+source ~/.redis
 
-# SSH Agent Stuff
-if [ -f ~/.sshagent ]; then
-    source ~/.sshagent
-fi
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
-# Machine Specific Stuff
-# Put private things in the .localrc file. This is good for things like
-# API key exports and other stuff you wouldn't want checked in to source
-# control. It's also nice for things that are truly machine specific.
-if [ -f ~/.localrc ]; then
-    source ~/.localrc
-fi
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-bindkey -v
-# End of lines configured by zsh-newuser-install
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/greg/.zshrc'
+# ssh
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
