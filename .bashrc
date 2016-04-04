@@ -20,7 +20,9 @@ source ~/.python
 # Redis Stuff
 source ~/.redis
 
-# SSH Agent Stuff
+# SSH
+export SSH_KEY_PATH="~/.ssh/rsa_id"
+
 if [ -f ~/.sshagent ]; then
     source ~/.sshagent
 fi
