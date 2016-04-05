@@ -4,20 +4,35 @@ export PATH="/usr/local/sbin:/usr/local/bin:~/bin:/usr/local/bin:/usr/bin:/bin:/
 # Oh My Zsh User Configuration Stuff
 source ~/.ohmyzsh
 
+# Brew said I needed this when I installed on OSX
+if [ -d /usr/local/share/zsh-completions ]; then
+    fpath=(/usr/local/share/zsh-completions $fpath)
+fi
+
 # Aliases
-source ~/.aliases
+if [ -f ~/.aliases ]; then
+    source ~/.aliases
+fi
 
 # Functions
-source ~/.functions
+if [ -f ~/.functions ]; then
+    source ~/.functions
+fi
 
 # Exports
-source ~/.exports
+if [ -f ~/.exports ]; then
+    source ~/.exports
+fi
 
 # Python Stuff
-source ~/.python
+if [ -f ~/.python ]; then
+    source ~/.python
+fi
 
 # Redis Stuff
-source ~/.redis
+if [ -f ~/.redis ]; then
+    source ~/.redis
+fi
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"

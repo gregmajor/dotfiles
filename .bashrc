@@ -3,22 +3,34 @@ export PATH=/usr/local/sbin:/usr/local/bin:~/bin:$PATH:~/dotfiles/bin
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # Git + Bash Prompt
-source ~/.bashprompt
+if [ -f ~/.bashprompt ]; then
+    source ~/.bashprompt
+fi
 
 # Aliases
-source ~/.aliases
+if [ -f ~/.aliases ]; then
+    source ~/.aliases
+fi
 
 # Functions
-source ~/.functions
+if [ -f ~/.functions ]; then
+    source ~/.functions
+fi
 
 # Exports
-source ~/.exports
+if [ -f ~/.exports ]; then
+    source ~/.exports
+fi
 
 # Python Stuff
-source ~/.python
+if [ -f ~/.python ]; then
+    source ~/.python
+fi
 
 # Redis Stuff
-source ~/.redis
+if [ -f ~/.redis ]; then
+     source ~/.redis
+fi
 
 # SSH
 export SSH_KEY_PATH="~/.ssh/rsa_id"
