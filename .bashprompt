@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-# Sexy bash prompt by twolfson
-# https://github.com/twolfson/sexy-bash-prompt
-# Forked from gf3, https://gist.github.com/gf3/306785
 
-# Attribution: http://linuxtidbits.wordpress.com/2008/08/11/output-color-on-bash-scripts/
-# NOTE: I created a .function to show all colors
+# Based on the Oh My Zsh Bullet Train theme (https://github.com/caiogondim/bullet-train-oh-my-zsh-theme)
+# -and-
+# The sexy bash prompt by twolfson (https://github.com/twolfson/sexy-bash-prompt)
 
 FG_BLACK=$(tput setaf 0)
 FG_RED=$(tput setaf 1)
@@ -51,15 +49,20 @@ else
 fi
 
 # Apply any color overrides that have been set in the environment
+if [[ -n "$PROMPT_TIME_COLOR" ]]; then BP_TIME_COLOR="$PROMPT_TIME_COLOR"; fi
 if [[ -n "$PROMPT_USER_COLOR" ]]; then BP_USER_COLOR="$PROMPT_USER_COLOR"; fi
 if [[ -n "$PROMPT_AT_SYMBOL_COLOR" ]]; then BP_AT_SYMBOL_COLOR="$PROMPT_AT_SYMBOL_COLOR"; fi
 if [[ -n "$PROMPT_DEVICE_COLOR" ]]; then BP_DEVICE_COLOR="$PROMPT_DEVICE_COLOR"; fi
+if [[ -n "$PROMPT_HOST_TERMINATOR_COLOR" ]]; then BP_HOST_TERMINATOR_COLOR="$PROMPT_HOST_TERMINATOR_COLOR"; fi
 if [[ -n "$PROMPT_DIR_COLOR" ]]; then BP_DIR_COLOR="$PROMPT_DIR_COLOR"; fi
+if [[ -n "$PROMPT_DIR_WITHOUT_GIT_TERMINATOR_COLOR" ]]; then BP_DIR_WITHOUT_GIT_TERMINATOR_COLOR="$PROMPT_DIR_WITHOUT_GIT_TERMINATOR_COLOR"; fi
+if [[ -n "$PROMPT_DIR_WITH_GIT_TERMINATOR_COLOR" ]]; then BP_DIR_WITH_GIT_TERMINATOR_COLOR="$PROMPT_DIR_WITH_GIT_TERMINATOR_COLOR"; fi
 if [[ -n "$PROMPT_GIT_STATUS_COLOR" ]]; then BP_GIT_STATUS_COLOR="$PROMPT_GIT_STATUS_COLOR"; fi
 if [[ -n "$PROMPT_GIT_PROGRESS_COLOR" ]]; then BP_GIT_PROGRESS_COLOR="$PROMPT_GIT_PROGRESS_COLOR"; fi
 if [[ -n "$PROMPT_SYMBOL" ]]; then BP_PROMPT_SYMBOL="$PROMPT_SYMBOL"; fi
 if [[ -n "$PROMPT_SYMBOL_COLOR" ]]; then BP_PROMPT_SYMBOL_COLOR="$PROMPT_SYMBOL_COLOR"; fi
 
+# Define the Git symbols
 BP_GIT_SYNCED_SYMBOL="$BOLD$FG_GREEN✔"
 BP_GIT_DIRTY_SYNCED_SYMBOL="$BOLD$FG_RED✹"
 BP_GIT_UNPUSHED_SYMBOL="$BOLD$FG_MAGENTA↑"
@@ -70,9 +73,6 @@ BP_GIT_UNPUSHED_UNPULLED_SYMBOL="$FG_MAGENTA↑↓"
 BP_GIT_DIRTY_UNPUSHED_UNPULLED_SYMBOL="$FG_MAGENTA⇑⇓"
 
 # Apply symbol overrides that have been set in the environment
-# DEV: Working unicode symbols can be determined via the following gist
-#   **WARNING: The following gist has 64k lines and may freeze your browser**
-#   https://gist.github.com/twolfson/9cc7968eb6ee8b9ad877
 if [[ -n "$PROMPT_SYNCED_SYMBOL" ]]; then BP_GIT_SYNCED_SYMBOL="$PROMPT_SYNCED_SYMBOL"; fi
 if [[ -n "$PROMPT_DIRTY_SYNCED_SYMBOL" ]]; then BP_GIT_DIRTY_SYNCED_SYMBOL="$PROMPT_DIRTY_SYNCED_SYMBOL"; fi
 if [[ -n "$PROMPT_UNPUSHED_SYMBOL" ]]; then BP_GIT_UNPUSHED_SYMBOL="$PROMPT_UNPUSHED_SYMBOL"; fi
@@ -239,6 +239,7 @@ sexy_bash_prompt_get_git_info () {
   fi
 }
 
+# Finally! Set the damn prompt
 PS1=''$'\n\[$BP_USER_COLOR\] \u\[$RESET\]\
 \[$BP_AT_SYMBOL_COLOR\]@\[$RESET\]\
 \[$BP_DEVICE_COLOR\]\h \[$RESET\]\
