@@ -11,6 +11,22 @@
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [alias]
+    # The branch name (useful for other aliases)
+    branch-name = "!git rev-parse --abbrev-ref HEAD"
+
+    # Fetch all remotes and merge origin
+    ready = !"git fetch --all -v; git merge --no-ff origin/$(git branch-name)"
+    #up "!git fetch --all; git merge --no-ff $(git branch-name)"
+
+    # List aliases
+    la = "!git config -l | grep alias | cut -c 7-"
+
+    # Fetch all remotes
+    fa = fetch --all
+    
+    # Push it REAL GOOD
+    pushitrealgood = !echo "Push it" && git push origin && echo "PUSH IT REAL GOOD"
+
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
