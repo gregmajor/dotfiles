@@ -1,5 +1,5 @@
 # Path Stuff
-export PATH="/usr/local/sbin:/usr/local/bin:~/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:~/dotfiles/bin"
+export PATH="/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:~/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:~/dotfiles/bin:/usr/local/CrossPack-AVR/bin"
 
 # Oh My Zsh User Configuration Stuff
 source ~/.ohmyzsh
@@ -45,3 +45,6 @@ fi
 if [ -f ~/.localrc ]; then
     source ~/.localrc
 fi
+
+# added by travis gem
+[ -f /Users/greg/.travis/travis.sh ] && source /Users/greg/.travis/travis.sh

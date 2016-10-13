@@ -2,6 +2,7 @@
 "set background=dark
 "colorscheme solarized
 "let g:solarized_termtrans=1
+colorscheme toothpaste
 
 " Configure Vundle
 set nocompatible

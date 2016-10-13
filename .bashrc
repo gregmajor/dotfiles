@@ -46,3 +46,6 @@ fi
 if [ -f ~/.localrc ]; then
     source ~/.localrc
 fi
+
+# added by travis gem
+[ -f /Users/greg/.travis/travis.sh ] && source /Users/greg/.travis/travis.sh
