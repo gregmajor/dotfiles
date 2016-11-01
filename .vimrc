@@ -1,24 +1,41 @@
-" Use the Solarized Dark theme
-"set background=dark
-"colorscheme solarized
-"let g:solarized_termtrans=1
-colorscheme toothpaste
-
-" Configure Vundle
 set nocompatible
 filetype off
+
+let mapleader=","
+
+" Configure Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-
-" Use Airline
+Plugin 'tpope/vim-sensible'
 Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-speeddating'
+Plugin 'tpope/vim-commentary'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'tomtom/tcomment_vim'
+
+" Provides :ToggleWhitespace and :StripWhitespace
+Plugin 'ntpeters/vim-better-whitespace'
+
+" Plugin 'Yggdroot/indentLine'
+" Plugin 'nathanelkane/vim-indent-guides'
 
 " Vundle needs this, too
 call vundle#end()
 filetype plugin indent on
 
-" Okay, all the Vundle and plugin stuff is over now
+" --- END VUNDLE ---
+
+
+" Use the Solarized Dark theme
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
+"let g:solarized_termtrans=1
 
 " Enable the buffer list with airline
 let g:airline#extensions#tabline#enabled = 1
@@ -41,13 +58,11 @@ set ttyfast
 " Add the g flag to search/replace by default
 set gdefault
 
-" Change mapleader
-"let mapleader=","
-
 " Dont create backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
 
 " Enable line numbers
+set relativenumber
 set number
 
 " Stop redrawing during macros and whatnot
@@ -60,7 +75,7 @@ set showmatch
 set mat=2
 
 " Enable syntax highlighting
-syntax on
+syntax enable
 
 " Highlight current line
 set cursorline
@@ -118,3 +133,20 @@ set showcmd
 
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
+
+" NERDTree
+nmap <leader>t :NERDTreeToggle<CR>
+let NERDTreeHighlightCursorline=1
+
+" tcomment
+map <leader>kc <c-_><c-_>
+
+" Format entire file
+nmap <leader>fef ggVG=
+
+" Open new buffers
+nmap <leader>s<left>  :leftabove  vnew<cr>
+nmap <leader>s<right> :rightabove vnew<cr>
+nmap <leader>s<up>    :leftabove  new<cr>
+nmap <leader>s<down>  :rightbelow new<cr>
+

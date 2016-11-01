@@ -48,3 +48,9 @@ fi
 
 # added by travis gem
 [ -f /Users/greg/.travis/travis.sh ] && source /Users/greg/.travis/travis.sh
+
+# This must be at the end of this file!
+if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
