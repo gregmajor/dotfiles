@@ -4,12 +4,22 @@
 [core]
 	# Set a global .gitignore file
 	excludesfile = /Users/greg/.gitignore_global
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+[merge]
+    tool = p4merge
+[mergetool "p4merge"]
+    path = "C:/Program Files/Perforce/p4merge.exe"
+    keepBackup = false
+    trustExitCode = false
+[diff]
+    tool = p4merge
+[push]
+    default = simple
+#[difftool "sourcetree"]
+#	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+#	path = 
+#[mergetool "sourcetree"]
+#	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+#	trustExitCode = true
 [alias]
     # The branch name (useful for other aliases)
     branch-name = "!git rev-parse --abbrev-ref HEAD"
@@ -86,8 +96,6 @@
 
 	# List contributors with number of commits
 	contributors = shortlog --summary --numbered
-[push]
-	default = simple
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean %f
