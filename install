@@ -7,7 +7,7 @@
 dotFileDirectory=~/dotfiles
 backupDirectory=~/.dotfilebackup
 
-dotFiles=".bashrc .bashprompt .vimrc .aliases .exports .functions .gitconfig .python .profile .gitignore_global .zshrc .ohmyzsh"
+dotFiles=".bashrc .bashprompt .vimrc .aliases .exports .functions .gitconfig .python .profile .gitignore_global .zshrc .ohmyzsh .tmux.conf .tmux-osx.conf"
 
 # Backup the existing dot files
 echo "Creating $backupDirectory..."

@@ -9,6 +9,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-sensible'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
@@ -30,12 +31,14 @@ filetype plugin indent on
 
 " --- END VUNDLE ---
 
-
-" Use the Solarized Dark theme
+" Set the vim theme
 set background=dark
 colorscheme solarized
 let g:solarized_termcolors=256
 "let g:solarized_termtrans=1
+
+" Set the airline theme
+let g:airline_theme='luna'
 
 " Enable the buffer list with airline
 let g:airline#extensions#tabline#enabled = 1
@@ -133,6 +136,16 @@ set showcmd
 
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
+
+if exists('$ITERM_PROFILE')
+        if exists('$TMUX') 
+                let &t_SI = "\<Esc>[3 q"
+                let &t_EI = "\<Esc>[0 q"
+        else
+                let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+                let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+        endif
+end
 
 " NERDTree
 nmap <leader>t :NERDTreeToggle<CR>
