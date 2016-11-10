@@ -33,7 +33,7 @@ filetype plugin indent on
 
 " Set the vim theme
 set background=dark
-colorscheme solarized
+colorscheme default
 let g:solarized_termcolors=256
 "let g:solarized_termtrans=1
 
