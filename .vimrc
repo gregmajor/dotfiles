@@ -18,6 +18,9 @@ Plugin 'tpope/vim-commentary'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'tomtom/tcomment_vim'
+Plugin 'vim-scripts/CycleColor'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'wincent/command-t'
 
 " Provides :ToggleWhitespace and :StripWhitespace
 Plugin 'ntpeters/vim-better-whitespace'
