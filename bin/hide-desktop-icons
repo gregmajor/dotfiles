@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# This script will hide desktop icons
+
+defaults write com.apple.finder CreateDesktop false
+
+killall Finder

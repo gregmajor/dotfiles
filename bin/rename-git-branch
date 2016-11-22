@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# This script will properly rename a Git branch. It needs some love.
+
+# $1 is the old branch
+# $2 is the new branch
+
+echo "Renaming the local branch..."
+git branch -m $1 $2
+
+echo "Deleting the old branch..."
+git push origin :$1
+
+echo "Pushing the new branch and setting tracking..."
+git push --set-upstream origin $2
+
+echo "Done!"
