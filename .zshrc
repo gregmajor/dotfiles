@@ -1,5 +1,20 @@
 # Path Stuff
-export PATH="/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:~/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:~/dotfiles/bin:/usr/local/CrossPack-AVR/bin"
+path+=(/sbin)
+path+=(/usr/sbin)
+path+=(/usr/local/sbin)
+path+=(/usr/local/bin)
+path+=($HOME/bin)
+path+=(/usr/bin)
+path+=(/bin)
+path+=(/usr/local/games)
+path+=(/usr/games)
+path+=($HOME/dotfiles/bin)
+path+=(/usr/local/CrossPack-AVR/bin)
+path+=($HOME/.rvm/bin) # Add RVM to PATH for scripting
+export PATH
+
+# Path Stuff
+#export PATH="/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:~/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:~/dotfiles/bin:/usr/local/CrossPack-AVR/bin"
 
 # Oh My Zsh User Configuration Stuff
 source ~/.ohmyzsh
