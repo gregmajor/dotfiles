@@ -19,4 +19,5 @@ export LESS_TERMCAP_md="${yellow}";
 export MANPAGER='less -X';
 
 # Make Homebrew symlink to the root Applications directory.
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications";
+export HOMEBREW_GITHUB_API_TOKEN="4e2960d52ee6b20add284aa50577a903cce8f18e";

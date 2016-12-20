@@ -1,3 +1,13 @@
+# Find recursively
+function f() {
+        find . -iname "*$1*" ${@:2}
+}
+
+# Recursively grep
+function r() {
+        grep "$1" ${@:2} -R .
+}
+
 # Create a new directory and enter it
 function mkd() {
 	mkdir -p "$@" && cd "$_";

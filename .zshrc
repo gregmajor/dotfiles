@@ -24,14 +24,14 @@ if [ -d /usr/local/share/zsh-completions ]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 
-# Aliases
-if [ -f ~/.aliases ]; then
-    source ~/.aliases
-fi
-
 # Functions
 if [ -f ~/.functions ]; then
     source ~/.functions
+fi
+
+# Aliases
+if [ -f ~/.aliases ]; then
+    source ~/.aliases
 fi
 
 # Exports
