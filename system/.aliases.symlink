@@ -21,6 +21,7 @@ alias dots="cd ~/dotfiles"
 alias blog="cd ~/Code/gregmajor.github.io"
 alias leadpipe="cd ~/Code/LeadPipe.Net"
 alias psake="powershell.exe ./psake.ps1"
+alias ldots="ls -ld ~/.??* | grep \"\->\""
 
 # Da fuck?
 alias fuck='$(thefuck $(fc -ln -1))'

@@ -1,6 +1,5 @@
 # Path Stuff
 export PATH=/usr/local/sbin:/usr/local/bin:~/bin:$PATH:~/dotfiles/bin
-# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # Git + Bash Prompt
 if [ -f ~/.bashprompt ]; then
@@ -49,3 +48,5 @@ fi
 
 # added by travis gem
 [ -f /Users/greg/.travis/travis.sh ] && source /Users/greg/.travis/travis.sh
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

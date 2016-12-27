@@ -12,6 +12,7 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-commentary'
@@ -21,6 +22,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'vim-scripts/CycleColor'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'wincent/command-t'
+Plugin 'jeetsukumaran/vim-buffergator'
 
 " Provides :ToggleWhitespace and :StripWhitespace
 Plugin 'ntpeters/vim-better-whitespace'
@@ -86,15 +88,29 @@ syntax enable
 " Highlight current line
 set cursorline
 
-" Use spaces instead of tabs
-set expandtab
-
-" Be smart when using tabs
-set smarttab
+" tabstop
+" The width of a hard tabstop measured in "spaces" -- effectively the (maximum) width of an actual tab character.
+"
+" shiftwidth
+" The size of an "indent". It's also measured in spaces, so if your code base indents with tab characters then you want shiftwidth to equal the number of tab characters times tabstop. This is also used by things like the =, > and < commands.
+"
+" softtabstop
+" Setting this to a non-zero value other than tabstop will make the tab key (in insert mode) insert a combination of spaces (and possibly tabs) to simulate tab stops at this width.
+"
+" expandtab
+" Enabling this will make the tab key (in insert mode) insert spaces instead of tab characters. This also affects the behavior of the retab command.
+"
+" smarttab
+" Enabling this will make the tab key (in insert mode) insert spaces or tabs to go to the next indent of the next tabstop when the cursor is at the beginning of a line (i.e. the only preceding characters are whitespace).
 
 " Make tabs as wide as four spaces
 set tabstop=4
 set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+" Be smart when using tabs
+set smarttab
 
 " Auto and smart indent
 set ai
@@ -153,6 +169,34 @@ end
 " NERDTree
 nmap <leader>t :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=1
+
+" Start NERDTree automagically
+autocmd vimenter * NERDTree
+
+" START: NERDCommenter Stuff
+
+" Add spaces after comment delimiters by default
+" let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+" let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+" let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+" let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" END: NERDCommenter Stuff
 
 " tcomment
 map <leader>kc <c-_><c-_>
