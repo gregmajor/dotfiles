@@ -1,7 +1,11 @@
 *~
 .DS_Store
 
-# Compiled source #
+# Temporary Files #
+###################
+*.swp
+
+# Compiled Source #
 ###################
 *.com
 *.class
@@ -24,12 +28,12 @@
 *.tar
 *.zip
  
-# Logs and databases #
+# Logs and Databases #
 ######################
 *.log
 *.sqlite
  
-# OS generated files #
+# OS Generated Files #
 ######################
 .DS_Store
 .DS_Store?

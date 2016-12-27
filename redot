@@ -26,14 +26,24 @@ then
 fi
 
 # Upgrade Homebrew
-user "Upgrade Homebrew/Linuxbrew? (y/n)"
+if test "$(uname)" = "Darwin"
+then
+    user "Upgrade Homebrew? (y/n)"
+else
+    user "Upgrade Linuxbrew? (y/n)"
+fi
 read -s -n 1 response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
     if test $(which brew)
     then
         brew update
     else
-        info "Homebrew/Linuxbrew not installed"
+        if test "$(uname)" = "Darwin"
+        then
+            info "Homebrew is not installed"
+        else
+            info "Linuxbrew is not installed"
+        fi
     fi
 fi
 

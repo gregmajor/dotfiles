@@ -10,23 +10,23 @@ function link_file () {
     local overwrite= backup= skip=
     local action=
 
-    # If the destination exists as a file, directory, or link then prompt the user for what to do.
+    # If the destination exists as a file, directory, or link then prompt the user for what to do
     if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
     then
 
         if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
         then
 
+            # If we've already linked then skip, otherwise prompt for action
             local currentSrc="$(readlink $dst)"
 
             if [ "$currentSrc" == "$src" ]
             then
-
                 skip=true;
             else
 
-                user "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
-                    [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+                user "File already exists: $dst ($(basename "$src")). What do you want to do?\n\
+                      [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
                 read -n 1 action
 
                 case "$action" in
@@ -86,7 +86,7 @@ function symlink_dotfiles () {
 
         local overwrite_all=false backup_all=false skip_all=false
 
-        for src in $(find -H "$DOTHOME" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
+        for src in $(find -H "$DOTHOME" -maxdepth 2 -name '*.symlink' -not -path '*.git')
         do
             dst="$HOME/$(basename "${src%.*}")"
             #echo "$src -> $dst"
