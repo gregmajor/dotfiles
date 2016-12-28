@@ -14,10 +14,10 @@ set_macos_preferences() {
     if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
 
         success "Set a blazingly fast keyboard repeat rate"
-        defaults write NSGlobalDomain KeyRepeat -int 0.02
+        defaults write NSGlobalDomain KeyRepeat -int 2
 
         success "Set a shorter delay until key repeat"
-        defaults write NSGlobalDomain InitialKeyRepeat -int 12
+        defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
         success "Enabled the Safari debug menu"
         defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
