@@ -13,6 +13,17 @@ set_macos_preferences() {
     read -s -n 1 response
     if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
 
+        # Close any open System Preferences panes, to prevent them from overriding settings we’re about to change
+        osascript -e 'tell application "System Preferences" to quit'
+
+        # Ask for the administrator password upfront
+        sudo -v
+
+        # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+        while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+        #########
+
         success "Set a blazingly fast keyboard repeat rate"
         defaults write NSGlobalDomain KeyRepeat -int 2
 
@@ -44,6 +55,7 @@ set_macos_preferences() {
 
         success "Set the save panel to expand by default"
         defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+        defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
         defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
         defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
@@ -54,12 +66,27 @@ set_macos_preferences() {
         defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
         defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
 
+        success "Set the printing preferences to quit when finished"
+        defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
         success "Using the system-native print preview dialog in Chrome"
         defaults write com.google.Chrome DisablePrintPreview -bool true
         defaults write com.google.Chrome.canary DisablePrintPreview -bool true
 
-        #success "Revealing IP address, hostname, OS version, etc. when clicking the clock in the login window"
-        #sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostsuccess HostName
+        success "Set to reveal IP address, hostname, OS version, etc. when clicking the clock in the login window"
+        sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostsuccess HostName
+
+        success "Set to 24-hour clock"
+        defaults write com.apple.menuextra.clock DateFormat -string 'EEE MMM d  H:mm:ss'
+
+        success "Set the computer to restart automatically on freeze"
+        sudo systemsetup -setrestartfreeze on
+
+        success "Disabled smart quotes (annoying when writing code)"
+        defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+        success "Disabled smart dashes (annoying when writing code)"
+        defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
         success "Set software updates to check daily instead of just once per week"
         defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
@@ -67,7 +94,27 @@ set_macos_preferences() {
         success "Set the printer app to quit automatically once the print jobs complete"
         defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-        echo ""
+        success "Set Finder to show all file extensions"
+        defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+        success "Set Finder to show the full POSIX path in the title"
+        defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+        success "Disabled the warning when changing a file extension"
+        defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+        success "Set Finder to use column view everywhere"
+        defaults write com.apple.finder FXPreferredViewStyle Clmv
+
+        success "Disabled writing DS_Store files to network drives"
+        defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+        success "Set to show the Library folder"
+        chflags nohidden ~/Library
+
+        success "Preventing Photos from opening every time a device is plugged in"
+        defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
         user "Enable tap-to-click? (y/n)"
         read -s -n 1 response
         if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
@@ -76,54 +123,18 @@ set_macos_preferences() {
             defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
         fi
 
-        echo ""
         user "Save to disk instead of iCloud by default? (y/n)"
         read -s -n 1 response
         if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
             defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
         fi
 
-        echo ""
         user "Disable the sudden motion sensor (it's not useful for SSDs)? (y/n)"
         read -s -n 1 response
         if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
             sudo pmset -a sms 0
         fi
 
-        echo ""
-        user "Show all filename extensions in Finder by default? (y/n)"
-        read -s -n 1 response
-        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-            defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-        fi
-
-        echo ""
-        user "Display full POSIX path as Finder window title? (y/n)"
-        read -s -n 1 response
-        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-            defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-        fi
-
-        echo ""
-        user "Disable the warning when changing a file extension? (y/n)"
-        read -s -n 1 response
-        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-            defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-        fi
-
-        echo ""
-        user "Use column view in all Finder windows by default? (y/n)"
-        read -s -n 1 response
-        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-            defaults write com.apple.finder FXPreferredViewStyle Clmv
-        fi
-
-        echo ""
-        user "Avoid creation of .DS_Store files on network volumes? (y/n)"
-        read -s -n 1 response
-        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-            defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-        fi
     fi
 }
 
