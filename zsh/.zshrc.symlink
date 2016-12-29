@@ -5,6 +5,11 @@ if [ -f $DOTHOME/system/shellrc ]; then
    source $DOTHOME/system/shellrc
 fi
 
+# Load Oh My ZSH!
+if [ -f $DOTHOME/ohmyzsh/ohmyzsh.zsh ]; then
+   source ~$DOTHOME/ohmyzsh/ohmyzsh.zsh
+fi
+
 # Load the Homebrew-installed ZSH completions
 # https://github.com/zsh-users/zsh-completions
 if [ -d /usr/local/share/zsh-completions ]; then
