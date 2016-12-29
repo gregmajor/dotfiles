@@ -1,2 +1,2 @@
-path+=($HOME/dotfiles/bin)
+PATH=$PATH:$HOME/dotfiles/bin
 

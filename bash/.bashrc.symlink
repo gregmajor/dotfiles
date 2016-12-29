@@ -1,0 +1,12 @@
+export DOTHOME=$HOME/dotfiles
+
+# Execute the stuff common to all shells (well, bash and zsh anyway)
+if [ -f $DOTHOME/system/shellrc ]; then
+   source $DOTHOME/system/shellrc
+fi
+
+# Git + Bash Prompt
+if [ -f ~/.bashprompt ]; then
+    source ~/.bashprompt
+fi
+

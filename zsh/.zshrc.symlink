@@ -1,24 +1,9 @@
 export DOTHOME=$HOME/dotfiles
 
-# Machine Specific Stuff
-if [ -f ~/.localrc ]; then
-   source ~/.localrc
+# Execute the stuff common to all shells (well, bash and zsh anyway)
+if [ -f $DOTHOME/system/shellrc ]; then
+   source $DOTHOME/system/shellrc
 fi
-
-# Load all of the path files
-for src in $(find -H "$DOTHOME" -name 'path.sh' -not -path '*.git')
-do
-    source $src
-done
-
-# Now export the whole path variable
-export PATH
-
-# Load all of the source files
-for src in $(find -H "$DOTHOME" -name '*.source' -not -path '*.git')
-do
-    source $src
-done
 
 # Load the Homebrew-installed ZSH completions
 # https://github.com/zsh-users/zsh-completions

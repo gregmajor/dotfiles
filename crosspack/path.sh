@@ -1,2 +1,2 @@
-path+=(/usr/local/CrossPack-AVR/bin)
+PATH=$PATH:/usr/local/CrossPack-AVR/bin
 

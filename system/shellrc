@@ -1,0 +1,22 @@
+export DOTHOME=$HOME/dotfiles
+
+# Machine Specific Stuff
+if [ -f ~/.localrc ]; then
+   source ~/.localrc
+fi
+
+# Load all of the path files
+for src in $(find -H "$DOTHOME" -name 'path.sh' -not -path '*.git')
+do
+    source $src
+done
+
+# Now export the whole path variable
+export PATH
+
+# Load all of the source files
+for src in $(find -H "$DOTHOME" -name '*.source' -not -path '*.git')
+do
+    source $src
+done
+

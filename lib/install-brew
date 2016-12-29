@@ -24,7 +24,7 @@ function install_brew () {
             fi
         fi
 
-        exit 0
+        return
     else
         if test "$(uname)" = "Darwin"
         then
