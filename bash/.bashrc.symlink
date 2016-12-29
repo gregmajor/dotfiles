@@ -6,7 +6,7 @@ if [ -f $DOTHOME/system/shellrc ]; then
 fi
 
 # Git + Bash Prompt
-if [ -f ~/.bashprompt ]; then
-    source ~/.bashprompt
+if [ -f $DOTHOME/bash/bashprompt ]; then
+    source $DOTHOME/bash/bashprompt
 fi
 
