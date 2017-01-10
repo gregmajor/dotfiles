@@ -1,13 +1,13 @@
 export DOTHOME=$HOME/dotfiles
 
+# Load Oh My ZSH!
+if [ -f $DOTHOME/ohmyzsh/ohmyzsh.zsh ]; then
+   source $DOTHOME/ohmyzsh/ohmyzsh.zsh
+fi
+
 # Execute the stuff common to all shells (well, bash and zsh anyway)
 if [ -f $DOTHOME/system/shellrc ]; then
    source $DOTHOME/system/shellrc
-fi
-
-# Load Oh My ZSH!
-if [ -f $DOTHOME/ohmyzsh/ohmyzsh.zsh ]; then
-   source ~$DOTHOME/ohmyzsh/ohmyzsh.zsh
 fi
 
 # Load the Homebrew-installed ZSH completions
