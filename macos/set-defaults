@@ -44,6 +44,9 @@ set_macos_preferences() {
         success "Set the status bar in Finder to show"
         defaults write com.apple.finder ShowStatusBar -bool true
 
+        success "Set Finder to show all files by default"
+        defaults write com.apple.finder AppleShowAllFiles YES
+
         success "Set the indicator lights for open applications in the Dock to show"
         defaults write com.apple.dock show-process-indicators -bool true
 

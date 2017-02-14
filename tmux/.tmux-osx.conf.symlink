@@ -1,5 +1,5 @@
 # Ask Tmux to use the reattach-to-user-namespace wrapper
-set-option -g default-command "reattach-to-user-namespace -l zsh"
+#set-option -g default-command "reattach-to-user-namespace -l zsh"
 
 # Start selecting text typing 'v' key (once you are in copy mode)
 bind-key -t vi-copy v begin-selection
