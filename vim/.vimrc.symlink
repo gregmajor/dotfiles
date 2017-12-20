@@ -23,6 +23,7 @@ Plugin 'vim-scripts/CycleColor'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'wincent/command-t'
 Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'ConradIrwin/vim-bracketed-paste'
 
 " Provides :ToggleWhitespace and :StripWhitespace
 Plugin 'ntpeters/vim-better-whitespace'
@@ -50,6 +51,11 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Show just the filename in the airline tab
 let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Toggle indent on paste with F2
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
 
 " Enhance command-line completion
 set wildmenu
