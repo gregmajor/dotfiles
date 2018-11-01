@@ -118,6 +118,10 @@ set_macos_preferences() {
         success "Preventing Photos from opening every time a device is plugged in"
         defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
+	success "Fixing key repeating in VS Code vim mode"
+	defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+	defaults delete -g ApplePressAndHoldEnabled
+
         user "Enable tap-to-click? (y/n)"
         read -s -n 1 response
         if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
