@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# abort if we're already inside a TMUX session
+# Abort if we're already inside a TMUX session
 [ "$TMUX" == "" ] || exit 0
 
-# startup a "default" session if none currently exists
-tmux has-session -t default || tmux new-session -s default -d
+# Startup a "greg" session if none currently exists
+tmux has-session -t greg || tmux new-session -s greg -d
 
-# present menu for user to choose which workspace to open
-PS3="Please choose your session: "
+# Present menu for user to choose which session to open
+PS3="Please pick a session: "
 options=($(tmux list-sessions -F "#S" 2>/dev/null) "New Session" "zsh")
 echo "Available Sessions"
 echo "------------------"
@@ -20,9 +20,6 @@ do
 			tmux new -s "$SESSION_NAME"
 			break
 			;;
-		"zsh")
-			zsh --login
-			break;;
 		*)
 			tmux attach-session -t $opt
 			break

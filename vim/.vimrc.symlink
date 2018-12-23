@@ -175,6 +175,7 @@ end
 " NERDTree
 nmap <leader>t :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=1
+let NERDTreeShowHidden=1
 
 " Start NERDTree automagically
 autocmd vimenter * NERDTree

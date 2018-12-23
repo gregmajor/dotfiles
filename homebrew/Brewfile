@@ -2,43 +2,75 @@ cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
 
+# System Utilities
+# These are the things I want installed on every Mac I use.
+cask 'alfred'
+cask 'bartender'
 brew 'doxygen'
-brew 'git'
-brew 'heroku'
-brew 'heroku-toolbelt'
-brew 'python'
-brew 'postgresql'
-brew 'redis'
+cask 'iterm2'
+cask 'google-chrome'
+#cask 'path-finder'
 brew 'thefuck'
 brew 'tmux'
+cask 'vlc'
 brew 'wget'
+brew 'ranger'
+brew 'peco'
+brew 'autojump'
 brew 'zsh'
 brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
 
-cask 'alfred'
-cask 'bartender'
-#cask 'cleanmymac'
-cask 'coderunner'
-cask 'datagrip'
-#cask 'evernote'
-cask 'iterm2'
-#cask 'karabiner'
-#cask 'keyboard-maestro'
-#cask 'flux'
-cask 'goland'
-cask 'google-chrome'
-#cask 'hammerspoon'
+# Workstation Applications
+# These are the apps I usually want installed on a general purpose workstation.
 cask 'lastpass'
-cask 'p4merge'
-cask 'path-finder'
+cask 'omnigraffle'
 cask 'pdf-expert'
-cask 'pycharm'
+cask 'signal'
 cask 'sketchup'
-cask 'spideroakone'
-#cask 'switchresx'
+cask 'slack'
+#cask 'spideroakone'
+cask 'sync'
+cask 'transmission'
+cask 'tunnelbear'
 cask 'ubersicht'
+cask 'zoomus'
+
+# Programming Applications
+# These are the apps I want installed on machines I program on.
+cask 'coderunner'
+cask 'apache-couchdb'
+cask 'datagrip'
+brew 'git'
+brew 'eolang'
+cask 'goland'
+brew 'heroku/brew/eeroku'
+brew 'heroku-toolbelt'
+cask 'p4merge'
+brew 'postgresql'
+cask 'postman'
+cask 'pycharm'
+#brew 'python'
+brew 'redis'
+cask 'rider'
+cask 'visual-studio'
 cask 'visual-studio-code'
-#cask 'vlc'
 cask 'webstorm'
 
+# Manual Installations
+# Adobe Create Cloud
+# Amphetamine
+# Bartender 3
+# Bear
+# Docker
+# FortiClient (VPN)
+# Logitech Presentation Remote
+# Magnet
+# Office 365
+# Parallels Desktop
+# Pixelmator
+# PopClip
+# Things
+# Unclutter
+# Xcode & CLI Tools
+# YubiKey Manager

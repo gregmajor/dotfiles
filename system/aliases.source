@@ -22,10 +22,14 @@ alias blog="cd ~/Code/gregmajor.github.io"
 alias leadpipe="cd ~/Code/LeadPipe.Net"
 alias psake="powershell.exe ./psake.ps1"
 alias ldots="ls -ld ~/.??* | grep \"\->\""
+alias kc="kubectl"
 
 alias gsfs="cd ~/Code/gsfs"
 alias feynman="k8switchcluster -d abilene.io -s feynman -p prod"
+alias wheeler="k8switchcluster -d abilene.io -s wheeler -p prod"
 alias einstein="k8switchcluster -d dimebox.io -s einstein -p preprod"
+alias penrose="k8switchcluster -d dimebox.io -s penrose -p preprod"
+alias hawking="k8switchcluster -d dimebox.io -s hawking -p preprod"
 
 # Da fuck?
 alias fuck='$(thefuck $(fc -ln -1))'
