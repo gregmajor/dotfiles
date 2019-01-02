@@ -1,9 +1,11 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
+tap 'homebrew/caskfonts'
 
 # System Utilities
 # These are the things I want installed on every Mac I use.
+cask 'font-firacode-nerd-font'
 cask 'alfred'
 cask 'bartender'
 brew 'doxygen'
@@ -16,7 +18,7 @@ cask 'vlc'
 brew 'wget'
 brew 'ranger'
 brew 'peco'
-brew 'autojump'
+brew 'tldr'                            # Condensed version of man
 brew 'zsh'
 brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
@@ -34,7 +36,8 @@ cask 'sync'
 cask 'transmission'
 cask 'tunnelbear'
 cask 'ubersicht'
-cask 'zoomus'
+cask 'zoomus'                          # Zoom.us web conferencing app
+brew 's-search'                        # Open a web search from the command line
 
 # Programming Applications
 # These are the apps I want installed on machines I program on.
@@ -42,6 +45,7 @@ cask 'coderunner'
 cask 'apache-couchdb'
 cask 'datagrip'
 brew 'git'
+brew 'tig'
 brew 'eolang'
 cask 'goland'
 brew 'heroku/brew/eeroku'

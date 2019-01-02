@@ -1,219 +1,200 @@
-set nocompatible
-filetype off
+set nocompatible                                        " Use vim(proved) settings rather than plain old vi. MUST BE FIRST!
+set encoding=utf8                                       " Use UTF-8 when showing things
+set fileencoding=utf8                                   " Use UTF-8 when writing things
+let mapleader=","                                       " Map the leader to a comma for ease of use. MUST BE BEFORE PLUGINS!
 
-let mapleader=","
+" ==============================================================================
+" Plugins
+" ==============================================================================
+filetype off                                            " Required by Vundle. https://github.com/VundleVim/Vundle.vim/issues/176
+set rtp+=~/.vim/bundle/Vundle.vim                       " Set the runtime path to include Vundle
+call vundle#begin()                                     " Initialize Vundle
 
-" Configure Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-sensible'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-commentary'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'vim-scripts/CycleColor'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'wincent/command-t'
-Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'ConradIrwin/vim-bracketed-paste'
+if exists(':Plugin')
+    Plugin 'VundleVim/Vundle.vim'                       " Let Vundle manage itself
+    Plugin 'tpope/vim-sensible'                         " Sensible defaults from Tim Pope
+    Plugin 'bling/vim-airline'                          " The lean and mean status line
+    Plugin 'vim-airline/vim-airline-themes'             " Stuff to make vim-airline pretty
+    Plugin 'scrooloose/nerdtree'                        " Explore the file system with <leader>n
+    Plugin 'scrooloose/syntastic'                       " Syntax checker
+    Plugin 'tpope/vim-commentary'                       " Commenting for many languages (ex: 'gcc' to comment a line)
+    Plugin 'tpope/vim-surround'                         " Easily delete, change, and add surroundings in pairs
+    Plugin 'tpope/vim-speeddating'                      " Make CTRL+A and CTRL+X increment/decrement dates
+    Plugin 'flazz/vim-colorschemes'                     " A shit ton of vim color schemes
+    Plugin 'vim-scripts/CycleColor'                     " Cycle through color schemes with F3 and F4
+    Plugin 'jeetsukumaran/vim-buffergator'              " Easily manage buffers with <leader>b
+    Plugin 'ctrlpvim/ctrlp.vim'                         " Open a fuzzy file/buffer/etc finder with CTRL+P
+    Plugin 'ConradIrwin/vim-bracketed-paste'            " Makes Cmd+v (paste) nicer
+    Plugin 'ryanoasis/vim-devicons'                     " Lots of cute little glyphs and stuff!
+    Plugin 'ntpeters/vim-better-whitespace'             " Provides :ToggleWhitespace and :StripWhitespace
+    Plugin 'Yggdroot/indentLine'                        " Shows an indention guide
 
-" Provides :ToggleWhitespace and :StripWhitespace
-Plugin 'ntpeters/vim-better-whitespace'
+    call vundle#end()                                   " Let Vundle know we're all done
+    filetype plugin indent on                           " Required by Vundle!
+endif
 
-" Plugin 'Yggdroot/indentLine'
-" Plugin 'nathanelkane/vim-indent-guides'
+" ==============================================================================
+" Vim Settings
+" ==============================================================================
 
-" Vundle needs this, too
-call vundle#end()
-filetype plugin indent on
+" General
+" ------------------------------------------------------------------------------
+set wildmenu                                            " Enable autocompletion when issuing vim commands with TAB and CTRL+TAB
+set wildmode=list:longest,full                          " When you invoke autocomplete, the first TAB shows the list and the second will show all the completions that were listed before
+set showcmd                                             " Show the (partial) command as it is being typed
+set esckeys                                             " Allow the Esc and cursor keys in insert mode
+set backspace=indent,eol,start                          " Allow backspaces in insert mode
+set ttyfast                                             " Optimize for fast terminal connections
+set backupskip=/tmp/*,/private/tmp/*                    " Don't create backups in certain directories
+set lazyredraw                                          " Stop redraws during macros and such
+set mouse=a                                             " Enable the mouse in all modes
+set noerrorbells                                        " Disable the error bell
+set novisualbell                                        " Disable the visual bell
+set nostartofline                                       " Don't reset the cursor to the start of the line when moving around
+set scrolloff=3                                         " Start scrolling three lines before the horizontal window border
+set ai                                                  " Auto indent
+set si                                                  " Smart indent
+syntax enable                                           " Turn on syntax highlighting
 
-" --- END VUNDLE ---
-
-" Set the vim theme
-set background=dark
-colorscheme 0x7A69_dark
-let g:solarized_termcolors=256
+" Appearance
+" ------------------------------------------------------------------------------
+set background=dark                                     " Make the background dark
+colorscheme dracula                                     " Set the color scheme (your default is 0x7A69_dark)
+"let g:solarized_termcolors=256
 "let g:solarized_termtrans=1
+set cursorline                                          " Highlight the current line
+set laststatus=2                                        " Always show the status line
+set ruler                                               " Show the ruler
+set title                                               " Show the filename in the window titlebar
+set showmode                                            " Show the current mode
+set shortmess=atI                                       " Don't show the Vim intro message
+set relativenumber                                      " Use relative line numbering
+set number                                              " Display line numbers
+set showmatch                                           " Highlight the matching brace, bracket, parent, etc.
+set mat=2                                               " Blink for 2/10 of a second when matching brackets
 
-" Set the airline theme
-let g:airline_theme='luna'
+" Tab Stops
+" ------------------------------------------------------------------------------
+set tabstop=4                                           " Set the width of a hard tab stop to 4 spaces
+set shiftwidth=4                                        " Set the shift width to the same value as a the hard stop (important)
+set softtabstop=4                                       " Make the tab key insert a combination of spaces (and possibly tabs) to simulate tab stops at this width
+set expandtab                                           " Insert spaces instead of tabs
+set smarttab                                            " Make the tab key insert spaces or tabs to go to the next indent of the next tab stop when the cursor is at the beginning of the line
 
-" Enable the buffer list with airline
-let g:airline#extensions#tabline#enabled = 1
+" Line Wrapping
+" ------------------------------------------------------------------------------
+set textwidth=0                                         " Override the annoying default of 78
+set nowrap                                              " Don't wrap lines (we map leader-W to toggle)
+set linebreak                                           " When wrapping, wrap at word boundaries (vs last char)
+if exists('+breakindent')                               " NOTE: v7.4.338 (June 25th, 2014) incorporated the breakindent patch into the mainline so this is an old safety
+    set breakindent                                     " Preserve the indent level of wrapped lines
+    set showbreak=↪                                     " Illustrate wrapped lines
+    set wrap                                            " Wrapping with breakindent is tolerable
+endif
+set whichwrap+=<,>,h,l                                  " When on the first/last character in a line, let left/right navigate through to the next line
 
-" Show just the filename in the airline tab
-let g:airline#extensions#tabline#fnamemod = ':t'
+" Spell Check
+" ------------------------------------------------------------------------------
+set spell                                               " Turn spell check on by default
+set spelllang=en                                        " Set the spell check language to English
+set spellfile=$HOME/dotfiles/vim/spell/en.utf-8.add     " Set a path for spell checking that's shared between computers
 
-" Toggle indent on paste with F2
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
+" Searching
+" ------------------------------------------------------------------------------
+set gdefault                                            " Make searches global by default
+set hlsearch                                            " Highlight searches
+set ignorecase                                          " Ignore case by default
+set incsearch                                           " Search as characters are typed
 
-" Enhance command-line completion
-set wildmenu
+" ==============================================================================
+" Plugin Settings
+" ==============================================================================
 
-" Allow cursor keys in insert mode
-set esckeys
+" Airline
+" ------------------------------------------------------------------------------
+let g:airline_theme='molokai'                           " Set the airline theme
+let g:airline#extensions#tabline#enabled = 1            " Enable the buffer list with airline
+let g:airline#extensions#tabline#fnamemod = ':t'        " Show just the filename in the airline tab
+let g:airline_powerline_fonts = 1                       " Enable powerline fonts
 
-" Allow backspace in insert mode
-set backspace=indent,eol,start
-
-" Optimize for fast terminal connections
-set ttyfast
-
-" Add the g flag to search/replace by default
-set gdefault
-
-" Dont create backups when editing files in certain directories
-set backupskip=/tmp/*,/private/tmp/*
-
-" Enable line numbers
-set relativenumber
-set number
-
-" Stop redrawing during macros and whatnot
-set lazyredraw
-
-" Show matching brackets when text indicator is over them
-set showmatch
-
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" Enable syntax highlighting
-syntax enable
-
-" Highlight current line
-set cursorline
-
-" tabstop
-" The width of a hard tabstop measured in "spaces" -- effectively the (maximum) width of an actual tab character.
-"
-" shiftwidth
-" The size of an "indent". It's also measured in spaces, so if your code base indents with tab characters then you want shiftwidth to equal the number of tab characters times tabstop. This is also used by things like the =, > and < commands.
-"
-" softtabstop
-" Setting this to a non-zero value other than tabstop will make the tab key (in insert mode) insert a combination of spaces (and possibly tabs) to simulate tab stops at this width.
-"
-" expandtab
-" Enabling this will make the tab key (in insert mode) insert spaces instead of tab characters. This also affects the behavior of the retab command.
-"
-" smarttab
-" Enabling this will make the tab key (in insert mode) insert spaces or tabs to go to the next indent of the next tabstop when the cursor is at the beginning of a line (i.e. the only preceding characters are whitespace).
-
-" Make tabs as wide as four spaces
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-
-" Be smart when using tabs
-set smarttab
-
-" Auto and smart indent
-set ai
-set si
-
-" Highlight searches
-set hlsearch
-
-" Ignore case of searches
-set ignorecase
-
-" Search as characters are entered
-set incsearch
-
-" Always show status line
-set laststatus=2
-
-" Enable mouse in all modes
-set mouse=a
-
-" Disable error bells
-set noerrorbells
-set novisualbell
-
-" Dont reset cursor to start of line when moving around.
-set nostartofline
-
-" Show the cursor position
-set ruler
-
-" Dont show the intro message when starting Vim
-set shortmess=atI
-
-" Show the current mode
-set showmode
-
-" Show the filename in the window titlebar
-set title
-
-" Show the (partial) command as it is being typed
-set showcmd
-
-" Start scrolling three lines before the horizontal window border
-set scrolloff=3
-
-if exists('$ITERM_PROFILE')
-        if exists('$TMUX') 
-                let &t_SI = "\<Esc>[3 q"
-                let &t_EI = "\<Esc>[0 q"
-        else
-                let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-                let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-        endif
-end
+" Syntastic
+" ------------------------------------------------------------------------------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " NERDTree
-nmap <leader>t :NERDTreeToggle<CR>
-let NERDTreeHighlightCursorline=1
-let NERDTreeShowHidden=1
+" ------------------------------------------------------------------------------
+let NERDTreeHighlightCursorline=1                       " Highlight the line the cursor is on in NERDTree
+let NERDTreeShowHidden=1                                " Show hidden files
+let g:NERDTreeNodeDelimiter = "\u00a0"                  " Avoid the goofy ^G as a node delimiter (https://stackoverflow.com/questions/53657545/nerdtree-g-before-folder-and-file-names-osx-terminal-vim)
+let NERDTreeQuitOnOpen = 1                              " Close NERDTree after a file is opened
 
-" Start NERDTree automagically
-autocmd vimenter * NERDTree
+" Toggle NERDTree
+nmap <leader>n :NERDTreeToggle<CR>
 
-" START: NERDCommenter Stuff
+" Start NERDTree automagically if no file(s) were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" Add spaces after comment delimiters by default
-" let g:NERDSpaceDelims = 1
+" Close vim if NERDTree is the only window left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Use compact syntax for prettified multi-line comments
-" let g:NERDCompactSexyComs = 1
+" Buffergator
+" ------------------------------------------------------------------------------
+let g:buffergator_suppress_keymaps = 1                  " We only use <leader>b so don't claim the others
 
-" Align line-wise comment delimiters flush left instead of following code indentation
-" let g:NERDDefaultAlign = 'left'
+" Toggle Buffergator
+nmap <leader>b :BuffergatorToggle<CR>
 
-" Set a language to use its alternate delimiters by default
-" let g:NERDAltDelims_java = 1
+" ==============================================================================
+" Miscellaneous Stuff
+" ==============================================================================
 
-" Add your own custom formats or override the defaults
-" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
-" END: NERDCommenter Stuff
-
-" tcomment
-map <leader>kc <c-_><c-_>
+" Toggle line wrapping
+nmap <leader>W :set invwrap<CR>:set wrap?<CR>
 
 " Format entire file
 nmap <leader>fef ggVG=
 
-" Open new buffers
-nmap <leader>s<left>  :leftabove  vnew<cr>
-nmap <leader>s<right> :rightabove vnew<cr>
-nmap <leader>s<up>    :leftabove  new<cr>
-nmap <leader>s<down>  :rightbelow new<cr>
+" Reindent the entire file
+nmap <leader>= gg=G``:echo "reindent global"<CR>
 
+" Allow for some common typos
+command! Q q                                            " Accept :Q as :q
+command! W w                                            " Accept :W as :w
+command! Qall qall                                      " Accept :Qall as :qall
+
+" Make Y behave similarly to D and C
+nnoremap Y y$
+
+" Delete trailing whitespace (http://vim.wikia.com/wiki/Remove_unwanted_spaces)
+function! RD_RemoveTrailingSpaces()
+    " Set a mark to return to later
+    normal m`
+    " Save the user's search register
+    let _lastsearch=@/
+    " Find any space/tab at ends of lines & remove the 'e' suppresses error if none found
+    %s/\s\+$//e
+    " Restore the search register
+    let @/=_lastsearch
+    " Jump back to the mark we set
+    normal ``
+    echo "Removed trailing spaces (if any)"
+endfunction
+nmap <leader>tw :call RD_RemoveTrailingSpaces()<CR>
+
+" Use different cursors for normal and insert modes when using vim in tmux in iTerm
+if exists('$ITERM_PROFILE')
+    if exists('$TMUX')
+        let &t_SI = "\<Esc>[3 q"
+        let &t_EI = "\<Esc>[0 q"
+    else
+        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    endif
+end

@@ -50,7 +50,7 @@ ZSH_THEME="bullet-train"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z virtualenv python pip debian osx brew zsh-nvm zsh-autosuggestions)
+plugins=(z virtualenv pip osx zsh-nvm zsh-autosuggestions aws)
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
