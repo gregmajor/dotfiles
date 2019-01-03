@@ -24,7 +24,11 @@ alias psake="powershell.exe ./psake.ps1"
 alias ldots="ls -ld ~/.??* | grep \"\->\""
 alias kc="kubectl"
 
+# Work Stuff
 alias gsfs="cd ~/Code/gsfs"
+alias canary="cd ~/Code/gsfs/Argon.Canary"
+alias prod="cd ~/Code/gsfs/Mercury.Production"
+alias preprod="cd ~/Code/gsfs/Mercury.PreProd"
 alias feynman="k8switchcluster -d abilene.io -s feynman -p prod"
 alias wheeler="k8switchcluster -d abilene.io -s wheeler -p prod"
 alias einstein="k8switchcluster -d dimebox.io -s einstein -p preprod"
