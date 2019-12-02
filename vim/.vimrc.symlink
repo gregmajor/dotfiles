@@ -26,8 +26,9 @@ if exists(':Plugin')
     Plugin 'ctrlpvim/ctrlp.vim'                         " Open a fuzzy file/buffer/etc finder with CTRL+P
     Plugin 'ConradIrwin/vim-bracketed-paste'            " Makes Cmd+v (paste) nicer
     Plugin 'ryanoasis/vim-devicons'                     " Lots of cute little glyphs and stuff!
-    Plugin 'ntpeters/vim-better-whitespace'             " Provides :ToggleWhitespace and :StripWhitespace
+"    Plugin 'ntpeters/vim-better-whitespace'             " Provides :ToggleWhitespace and :StripWhitespace
     Plugin 'Yggdroot/indentLine'                        " Shows an indention guide
+"    Plugin 'tpope/vim-dadbod'                           " Modern database interface for Vim
 
     call vundle#end()                                   " Let Vundle know we're all done
     filetype plugin indent on                           " Required by Vundle!
@@ -171,6 +172,9 @@ command! Qall qall                                      " Accept :Qall as :qall
 
 " Make Y behave similarly to D and C
 nnoremap Y y$
+
+" Use the space bar to scroll a'la MacOS
+nnoremap <Space> <C-d>
 
 " Delete trailing whitespace (http://vim.wikia.com/wiki/Remove_unwanted_spaces)
 function! RD_RemoveTrailingSpaces()

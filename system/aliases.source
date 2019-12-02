@@ -23,17 +23,29 @@ alias leadpipe="cd ~/Code/LeadPipe.Net"
 alias psake="powershell.exe ./psake.ps1"
 alias ldots="ls -ld ~/.??* | grep \"\->\""
 alias kc="kubectl"
+alias killcups="sudo launchctl unload /System/Library/LaunchDaemons/org.cups.cupsd.plist"
+alias startcups="sudo launchctl load /System/Library/LaunchDaemons/org.cups.cupsd.plist"
+
+# Docker Stuff
+alias dk="docker"
+alias dc="docker-compose"
+alias dki="docker images"
+alias dkp="docker system prune -a"
+alias dcps="docker-compose ps"
+alias dcup="docker-compose up -d app"
+alias dcdn="docker-compose down"
 
 # Work Stuff
 alias gsfs="cd ~/Code/gsfs"
 alias canary="cd ~/Code/gsfs/Argon.Canary"
 alias prod="cd ~/Code/gsfs/Mercury.Production"
 alias preprod="cd ~/Code/gsfs/Mercury.PreProd"
-alias feynman="k8switchcluster -d abilene.io -s feynman -p prod"
-alias wheeler="k8switchcluster -d abilene.io -s wheeler -p prod"
-alias einstein="k8switchcluster -d dimebox.io -s einstein -p preprod"
-alias penrose="k8switchcluster -d dimebox.io -s penrose -p preprod"
-alias hawking="k8switchcluster -d dimebox.io -s hawking -p preprod"
+alias feynman="~/Code/gsfs/Zinc.DeveloperSetup/scripts/kubernetes/k8sswitchcluster -d abilene.io -s feynman -p prod"
+alias wheeler="~/Code/gsfs/Zinc.DeveloperSetup/scripts/kubernetes/k8sswitchcluster -d abilene.io -s wheeler -p prod"
+alias einstein="~/Code/gsfs/Zinc.DeveloperSetup/scripts/kubernetes/k8sswitchcluster -d dimebox.io -s einstein -p preprod"
+alias penrose="~/Code/gsfs/Zinc.DeveloperSetup/scripts/kubernetes/k8sswitchcluster -d dimebox.io -s penrose -p preprod"
+alias hawking="~/Code/gsfs/Zinc.DeveloperSetup/scripts/kubernetes/k8sswitchcluster -d dimebox.io -s hawking -p preprod"
+alias newton="~/Code/gsfs/Zinc.DeveloperSetup/scripts/kubernetes/k8sswitchcluster -d dimebox.io -s newton -p preprod"
 
 # Da fuck?
 alias fuck='$(thefuck $(fc -ln -1))'
