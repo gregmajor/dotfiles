@@ -118,29 +118,29 @@ set_macos_preferences() {
         success "Preventing Photos from opening every time a device is plugged in"
         defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
-	success "Fixing key repeating in VS Code vim mode"
-	defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
-	defaults delete -g ApplePressAndHoldEnabled
+	    success "Fixing key repeating in VS Code vim mode"
+    	defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+	    defaults delete -g ApplePressAndHoldEnabled
 
-        user "Enable tap-to-click? (y/n)"
-        read -s -n 1 response
-        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-            defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-            defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-            defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-        fi
+        #user "Enable tap-to-click? (y/n)"
+        #read -s -n 1 response
+        #if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        #    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+        #    defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+        #    defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+        #fi
 
-        user "Save to disk instead of iCloud by default? (y/n)"
-        read -s -n 1 response
-        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-            defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
-        fi
+        #user "Save to disk instead of iCloud by default? (y/n)"
+        #read -s -n 1 response
+        #if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        #    defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+        #fi
 
-        user "Disable the sudden motion sensor (it's not useful for SSDs)? (y/n)"
-        read -s -n 1 response
-        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-            sudo pmset -a sms 0
-        fi
+        #user "Disable the sudden motion sensor (it's not useful for SSDs)? (y/n)"
+        #read -s -n 1 response
+        #if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        #    sudo pmset -a sms 0
+        #fi
 
     fi
 }
