@@ -1,0 +1,7 @@
+cd /
+cd Library/LaunchDaemons
+sudo rm -rf com.fortinet.forticlient.*
+cd /
+cd "Library/Application Support/Fortinet"
+sudo rm -R FortiClient
+echo "Reboot and run the FortiClientUninstaller from the Applications folder"

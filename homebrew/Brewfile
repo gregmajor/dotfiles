@@ -1,7 +1,7 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
-tap 'homebrew/caskfonts'
+tap 'homebrew/cask-fonts'
 
 # System Utilities
 # These are the things I want installed on every Mac I use.
@@ -26,14 +26,15 @@ brew 'fzf'
 
 # Workstation Applications
 # These are the apps I usually want installed on a general purpose workstation.
-cask 'lastpass'
+#cask 'lastpass'
+cask '1password'
 cask 'omnigraffle'
 cask 'pdf-expert'
 cask 'signal'
 cask 'sketchup'
 cask 'slack'
 #cask 'spideroakone'
-cask 'sync'
+#cask 'sync'
 cask 'transmission'
 cask 'tunnelbear'
 cask 'ubersicht'
@@ -43,39 +44,46 @@ brew 's-search'                        # Open a web search from the command line
 # Programming Applications
 # These are the apps I want installed on machines I program on.
 cask 'coderunner'
-cask 'apache-couchdb'
 cask 'datagrip'
 brew 'git'
 brew 'tig'
-brew 'eolang'
 cask 'goland'
-brew 'heroku/brew/eeroku'
-brew 'heroku-toolbelt'
-cask 'p4merge'
-brew 'postgresql'
+#brew 'heroku/brew/eeroku'
+#brew 'heroku-toolbelt'
+#cask 'p4merge'
 cask 'postman'
 cask 'pycharm'
-#brew 'python'
 brew 'redis'
 cask 'rider'
 cask 'visual-studio'
 cask 'visual-studio-code'
 cask 'webstorm'
+cask 'parallels'
+cask 'adobe-creative-cloud'
+cask 'forticlient'
+cask 'kaleidoscope'
 
 # Manual Installations
-# Adobe Create Cloud
 # Amphetamine
-# Bartender 3
 # Bear
 # Docker
-# FortiClient (VPN)
 # Logitech Presentation Remote
 # Magnet
 # Office 365
-# Parallels Desktop
 # Pixelmator
-# PopClip
+# Popclip
+# Sync
+# Python
 # Things
 # Unclutter
-# Xcode & CLI Tools
 # YubiKey Manager
+# Adobe Creative Cloud
+# Atlassian Companion
+# CheatSheet
+# Cura
+# MindNode
+# Navicat
+# OmniGraffle
+# Reeder
+# Go
+# AWS CLI
