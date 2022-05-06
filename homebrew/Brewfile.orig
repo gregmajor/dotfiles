@@ -1,0 +1,96 @@
+cask_args appdir: '/Applications'
+
+tap 'homebrew/bundle'
+tap 'homebrew/cask-fonts'
+
+# System Utilities
+# These are the things I want installed on every Mac I use.
+cask 'font-firacode-nerd-font'
+cask 'alfred'
+cask 'bartender'
+brew 'doxygen'
+cask 'iterm2'
+cask 'google-chrome'
+#cask 'path-finder'
+brew 'thefuck'
+brew 'tmux'
+cask 'vlc'
+brew 'wget'
+brew 'ranger'
+brew 'peco'
+brew 'tldr'                            # Condensed version of man
+brew 'zsh'
+brew 'zsh-completions'
+brew 'zsh-syntax-highlighting'
+brew 'fzf'
+
+# Workstation Applications
+# These are the apps I usually want installed on a general purpose workstation.
+#cask 'lastpass'
+cask '1password'
+cask 'omnigraffle'
+cask 'pdf-expert'
+cask 'signal'
+cask 'sketchup'
+cask 'slack'
+#cask 'spideroakone'
+#cask 'sync'
+cask 'transmission'
+cask 'tunnelbear'
+cask 'ubersicht'
+cask 'zoomus'                          # Zoom.us web conferencing app
+brew 's-search'                        # Open a web search from the command line
+
+# Programming Applications
+# These are the apps I want installed on machines I program on.
+cask 'coderunner'
+cask 'datagrip'
+brew 'git'
+brew 'tig'
+cask 'goland'
+<<<<<<< HEAD
+#brew 'heroku/brew/eeroku'
+#brew 'heroku-toolbelt'
+#cask 'p4merge'
+=======
+brew 'heroku/brew/heroku'
+brew 'heroku-toolbelt'
+cask 'p4merge'
+brew 'postgresql'
+>>>>>>> 5c1b74774081b8834893603050ade8154f2e4ded
+cask 'postman'
+cask 'pycharm'
+brew 'redis'
+cask 'rider'
+cask 'visual-studio'
+cask 'visual-studio-code'
+cask 'webstorm'
+cask 'parallels'
+cask 'adobe-creative-cloud'
+cask 'forticlient'
+cask 'kaleidoscope'
+
+# Manual Installations
+# Amphetamine
+# Bear
+# Docker
+# Logitech Presentation Remote
+# Magnet
+# Office 365
+# Pixelmator
+# Popclip
+# Sync
+# Python
+# Things
+# Unclutter
+# YubiKey Manager
+# Adobe Creative Cloud
+# Atlassian Companion
+# CheatSheet
+# Cura
+# MindNode
+# Navicat
+# OmniGraffle
+# Reeder
+# Go
+# AWS CLI
