@@ -60,7 +60,7 @@ syntax enable                                           " Turn on syntax highlig
 " Appearance
 " ------------------------------------------------------------------------------
 set background=dark                                     " Make the background dark
-colorscheme dracula                                     " Set the color scheme (your default is 0x7A69_dark)
+colorscheme 0x7A69_dark                                 " Set the color scheme (your default is 0x7A69_dark)
 "let g:solarized_termcolors=256
 "let g:solarized_termtrans=1
 set cursorline                                          " Highlight the current line

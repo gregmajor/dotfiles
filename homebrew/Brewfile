@@ -62,6 +62,7 @@ cask 'parallels'
 cask 'adobe-creative-cloud'
 #cask 'forticlient'
 cask 'kaleidoscope'
+brew 'python'
 
 # Manual Installations
 # Amphetamine
@@ -73,7 +74,6 @@ cask 'kaleidoscope'
 # Pixelmator
 # Popclip
 # Sync
-# Python
 # Things
 # Unclutter
 # YubiKey Manager
