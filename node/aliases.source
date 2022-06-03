@@ -1,2 +1,4 @@
 # Allows for running the correct copy of an installed package (ref: https://stackoverflow.com/questions/9679932/how-to-use-package-installed-locally-in-node-modules)
-alias npm-exec='PATH=$(npm bin):$PATH'
+
+# GBM: 2022-06-02, This is deprecated now that npx handles it.
+# alias npm-exec='PATH=$(npm bin):$PATH'
