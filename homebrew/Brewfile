@@ -5,7 +5,7 @@ tap 'homebrew/cask-fonts'
 
 # System Utilities
 # These are the things I want installed on every Mac I use.
-cask 'font-firacode-nerd-font'
+cask 'font-fira-code-nerd-font'
 #cask 'alfred'
 cask 'bartender'
 brew 'doxygen'
@@ -39,7 +39,7 @@ cask 'slack'
 cask 'transmission'
 cask 'tunnelbear'
 cask 'ubersicht'
-cask 'zoomus'                          # Zoom.us web conferencing app
+cask 'zoom'                          # Zoom.us web conferencing app
 brew 's-search'                        # Open a web search from the command line
 
 # Programming Applications
@@ -58,13 +58,14 @@ cask 'postman'
 cask 'pycharm'
 brew 'redis'
 cask 'rider'
-cask 'visual-studio'
+#cask 'visual-studio'
 cask 'visual-studio-code'
 cask 'webstorm'
 cask 'parallels'
 cask 'adobe-creative-cloud'
-cask 'forticlient'
+#cask 'forticlient'
 cask 'kaleidoscope'
+brew 'python'
 
 # Manual Installations
 # Adobe Creative Cloud
@@ -77,7 +78,6 @@ cask 'kaleidoscope'
 # Pixelmator
 # Popclip
 # Sync
-# Python
 # Things
 # Unclutter
 # YubiKey Manager

@@ -1,6 +1,6 @@
 save-exact=true
-init.author.name=Greg Major
-init.author.email=greg@leadpipesoftware.com
-init.author.url=http://www.leadpipesoftware.com
-init.license=MIT
-init.version=0.0.1
+init-author-name=Greg Major
+init-author-email=greg@leadpipesoftware.com
+init-author-url=http://www.leadpipesoftware.com
+init-license=MIT
+init-version=0.0.1
