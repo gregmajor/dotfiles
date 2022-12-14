@@ -1,1 +1,0 @@
-PATH=$PATH:/Users/greg/Library/Python/3.8/bin

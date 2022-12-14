@@ -4,32 +4,21 @@
 [core]
 	# Set a global .gitignore file
 	excludesfile = /Users/greg/.gitignore_global
+[init]
+	defaultBranch = main
 [merge]
   keepBackup = false
 	tool = Kaleidoscope
-[mergetool "p4merge"]
-	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$PWD/$BASE\"" "\"$PWD/$REMOTE\"" "\"$PWD/$LOCAL\"" "\"$PWD/$MERGED\""
-	keepTemporaries = false
-	trustExitCode = false
-	keepBackup = false
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" \"$REMOTE\"
     prompt = false
 [diff]
     tool = Kaleidoscope
-[difftool "p4merge"]
-	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$REMOTE\"" "\"$LOCAL\""
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
     prompt = false
 [push]
     default = simple
-#[difftool "sourcetree"]
-#	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-#	path = 
-#[mergetool "sourcetree"]
-#	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-#	trustExitCode = true
 [url "ssh://git@github.com/"]
     insteadOf = https://github.com/
 [alias]
@@ -111,6 +100,3 @@
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-[init]
-	defaultBranch = main

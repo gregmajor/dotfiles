@@ -40,7 +40,7 @@ cask 'transmission'
 cask 'tunnelbear'
 cask 'ubersicht'
 cask 'zoom'                          # Zoom.us web conferencing app
-brew 's-search'                        # Open a web search from the command line
+brew 's-search'                      # Open a web search from the command line
 
 # Programming Applications
 # These are the apps I want installed on machines I program on.
@@ -65,7 +65,8 @@ cask 'parallels'
 cask 'adobe-creative-cloud'
 #cask 'forticlient'
 cask 'kaleidoscope'
-brew 'python'
+#brew 'python'
+brew 'pyenv'
 
 # Manual Installations
 # Adobe Creative Cloud

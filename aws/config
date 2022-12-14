@@ -3,9 +3,9 @@ region=us-east-1
 output=json
 
 [preprod]
-regsion=us-east-1
+region=us-east-1
 output=json
 
 [prod]
-regsion=us-east-1
+region=us-east-1
 output=json
